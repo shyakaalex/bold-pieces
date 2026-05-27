@@ -1,0 +1,1746 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Bold Pieces — Quietly worn, boldly made.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Italiana&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    /* Palette (emerald default; overwritten by Tweaks) */
+    --bg:        #f2f0ec;
+    --bg-2:      #ffffff;
+    --bg-3:      #ece7dd;
+    --ink:       #143131;
+    --gold:      #C8A66B;
+    --gold-2:    #E6CC8E;
+    --cream:     #ffffff;
+    --cream-2:   #f9f8f6;
+    --muted:     rgba(20,49,49,.62);
+    --line:      rgba(20,49,49,.16);
+    --line-2:    rgba(20,49,49,.08);
+    --maroon:    #5a2431;
+
+    --serif: "Cormorant Garamond", "Playfair Display", Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, monospace;
+  }
+
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit}
+  img{display:block;max-width:100%}
+
+  /* Type utilities */
+  .serif{font-family:var(--serif)}
+  .mono{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+  .eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+
+  /* Container */
+  .wrap{max-width:1360px;margin:0 auto;padding:0 40px}
+  @media (max-width:720px){ .wrap{padding:0 22px} }
+
+  /* Buttons */
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:14px 22px;border-radius:2px;cursor:pointer;
+    font-family:var(--sans);font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;
+    border:1px solid var(--gold);background:transparent;color:var(--cream);
+    transition:background .25s ease,color .25s ease,transform .25s ease, box-shadow .25s ease;
+  }
+  .btn:hover{background:var(--gold);color:var(--ink);box-shadow:0 12px 24px rgba(0,0,0,.26)}
+  .btn.solid{background:var(--gold);color:var(--ink)}
+  .btn.solid:hover{background:var(--gold-2);border-color:var(--gold-2)}
+  .btn .arr{transition:transform .25s ease}
+  .btn:hover .arr{transform:translateX(4px)}
+
+  /* Scroll progress */
+  .scroll-rail{position:fixed;top:0;left:0;right:0;height:1px;background:rgba(244,237,225,.06);z-index:200}
+  .scroll-rail i{display:block;height:100%;width:0%;background:linear-gradient(90deg,transparent,var(--gold),var(--gold-2));}
+
+  /* Announcement bar */
+  .announce{
+    position:relative;background:var(--bg-2);border-bottom:1px solid var(--line-2);
+    color:var(--cream-2);font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;
+    height:34px;display:flex;align-items:center;overflow:hidden;
+  }
+  .announce .track{display:flex;gap:64px;white-space:nowrap;animation:marquee 38s linear infinite;padding-left:64px}
+  .announce .track span{opacity:.74}
+  .announce .track .dot{color:var(--gold);opacity:.9}
+  @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* Nav */
+  .nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(242,240,236,.72);
+    -webkit-backdrop-filter:blur(14px) saturate(140%);backdrop-filter:blur(14px) saturate(140%);
+    border-bottom:1px solid var(--line-2);
+  }
+  .nav-inner{
+    display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+    height:84px;padding:0 40px;max-width:1440px;margin:0 auto;
+  }
+  .nav-links{display:flex;gap:34px;align-items:center;justify-self:start}
+  .nav-link{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--ink);opacity:.7;cursor:pointer;
+    position:relative;padding-bottom:4px;
+  }
+  .nav-link:hover{opacity:1;color:var(--cream)}
+  .nav-link::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
+  .nav-link:hover::after{transform:scaleX(1)}
+  .logo{justify-self:center;display:flex;align-items:center;gap:14px;cursor:pointer}
+  .logo-mark{
+    width:46px;height:46px;border:1px solid var(--gold);border-radius:50%;
+    display:grid;place-items:center;color:var(--gold);
+    font-family:var(--serif);font-weight:500;font-size:22px;letter-spacing:.02em;
+    position:relative;
+  }
+  .logo-mark::after{
+    content:"";position:absolute;inset:-5px;border:1px solid var(--line);border-radius:50%;
+  }
+  .logo-word{font-family:var(--serif);font-size:22px;letter-spacing:.36em;color:var(--ink);font-weight:500}
+  .nav-actions{display:flex;gap:18px;align-items:center;justify-self:end}
+  .icon-btn{
+    width:38px;height:38px;display:grid;place-items:center;border:1px solid transparent;
+    border-radius:999px;color:var(--ink);cursor:pointer;background:rgba(255,255,255,.8);
+    transition:border-color .25s ease,color .25s ease;
+  }
+  .icon-btn:hover{border-color:var(--line);color:var(--cream)}
+  .cart-btn{position:relative}
+  .cart-pill{
+    position:absolute;top:-2px;right:-2px;min-width:18px;height:18px;border-radius:9px;
+    background:var(--gold);color:var(--ink);font-size:10px;font-weight:700;
+    display:grid;place-items:center;padding:0 5px;
+  }
+
+  /* HERO */
+  .hero{position:relative;overflow:hidden;padding:34px 0 80px}
+  .hero::before{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(900px 600px at 78% 30%, rgba(200,166,107,.10), transparent 60%),
+      radial-gradient(700px 500px at 20% 90%, rgba(200,166,107,.06), transparent 60%);
+    pointer-events:none;
+  }
+  .hero-grid{position:relative;display:grid;grid-template-columns:1fr;gap:20px}
+  @media (max-width:980px){ .hero-grid{grid-template-columns:1fr;gap:40px} }
+  .hero-eyebrow{display:flex;gap:14px;align-items:center;margin-bottom:30px}
+  .hero-eyebrow .bar{width:42px;height:1px;background:var(--gold)}
+  .hero h1{
+    font-family:var(--serif);font-weight:400;
+    font-size:clamp(48px, 7.6vw, 112px);
+    line-height:.96;letter-spacing:-.01em;
+    margin:0 0 18px;color:#ffffff;
+  }
+  .hero h1 em{font-style:italic;color:var(--gold);font-weight:300}
+  .hero p.lede{
+    font-family:var(--serif);font-size:clamp(18px,1.4vw,22px);line-height:1.55;
+    color:rgba(255,255,255,.84);max-width:440px;margin:0 0 30px;font-weight:300;
+  }
+  .hero-ctas{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+  .hero-meta{display:flex;gap:36px;margin-top:62px}
+  .hero-meta .m{display:flex;flex-direction:column;gap:6px}
+  .hero-meta .num{font-family:var(--serif);font-size:38px;color:var(--gold);font-weight:400;line-height:1}
+  .hero-meta .lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+
+  /* Hero visual */
+  .hero-stage{position:relative;aspect-ratio:16/9;min-height:420px}
+  .stage-photo{
+    position:absolute;inset:0;border-radius:6px;overflow:hidden;
+    background:
+      radial-gradient(900px 500px at 75% 80%, rgba(90,36,49,.45), transparent 60%),
+      radial-gradient(700px 420px at 60% 30%, rgba(200,166,107,.26), transparent 65%),
+      linear-gradient(160deg, #1f2a2a 0%, #0f1717 55%, #182424 100%);
+    box-shadow:0 25px 70px -30px rgba(0,0,0,.45), 0 0 0 1px var(--line-2);
+  }
+  .stage-photo::before{
+    /* subtle velvet texture */
+    content:"";position:absolute;inset:0;
+    background:repeating-linear-gradient(120deg, rgba(255,255,255,.012) 0 2px, transparent 2px 5px);
+    mix-blend-mode:overlay;
+  }
+  .stage-photo .placeholder{
+    position:absolute;inset:auto 0 24px 0;text-align:center;
+    font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:rgba(244,237,225,.5);
+  }
+  /* SVG ring centered */
+  .stage-photo svg.ring{position:absolute;left:50%;top:50%;transform:translate(-50%,-52%);width:62%;height:auto;filter:drop-shadow(0 30px 30px rgba(0,0,0,.55))}
+  .stage-badge{
+    position:absolute;top:18px;right:18px;width:122px;height:122px;border-radius:50%;
+    border:1px solid var(--gold);color:var(--gold);
+    display:grid;place-items:center;text-align:center;
+    background:rgba(10,20,20,.6);backdrop-filter:blur(10px);
+    font-family:var(--serif);font-size:13px;letter-spacing:.2em;text-transform:uppercase;
+    animation: spin 30s linear infinite;
+  }
+  .stage-badge .inner{transform:none}
+  .stage-badge span{display:block;line-height:1.5}
+  .stage-badge .big{font-size:30px;letter-spacing:.06em;margin:6px 0;font-family:var(--serif);font-weight:400}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  .stage-cap{
+    position:absolute;left:24px;bottom:24px;background:rgba(255,255,255,.88);
+    border:1px solid var(--line);padding:14px 18px;border-radius:2px;max-width:240px;
+    box-shadow:0 18px 40px rgba(0,0,0,.4);
+  }
+  .stage-cap .t{font-family:var(--serif);font-size:18px;color:var(--ink)}
+  .stage-cap .s{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;color:var(--maroon);margin-top:6px}
+  .stage-cap .price{margin-top:10px;font-family:var(--serif);color:var(--gold-2);font-size:16px}
+
+  /* CATEGORIES */
+  .section{padding:90px 0;position:relative}
+  .section-head{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:60px;flex-wrap:wrap}
+  .section-head h2{
+    font-family:var(--serif);font-weight:400;
+    font-size:clamp(36px,4.6vw,64px);line-height:1;margin:0;color:var(--ink);letter-spacing:-.005em;
+  }
+  .section-head h2 em{font-style:italic;color:var(--gold);font-weight:300}
+  .section-head .sub{font-family:var(--serif);font-size:18px;color:var(--cream-2);max-width:380px;line-height:1.5;font-weight:300}
+
+  .cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:-72px;position:relative;z-index:3}
+  @media (max-width:980px){.cat-grid{grid-template-columns:1fr;margin-top:20px}}
+  .cat{
+    position:relative;aspect-ratio: 4 / 3;border:1px solid var(--line);
+    background:#ffffff;
+    cursor:pointer;overflow:hidden;transition:transform .4s ease, border-color .4s ease;
+    border-radius:16px;
+    box-shadow:0 16px 30px -22px rgba(0,0,0,.28);
+  }
+  .cat:hover{border-color:var(--gold);transform:translateY(-4px)}
+  .cat .num{position:absolute;top:14px;left:14px;font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--gold);opacity:.75}
+  .cat .ico{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);width:46%;color:var(--gold-2);opacity:.95}
+  .cat .label{position:absolute;left:18px;right:18px;bottom:18px}
+  .cat .label .t{font-family:var(--serif);font-size:30px;color:var(--ink)}
+  .cat .label .c{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;color:var(--muted);margin-top:6px;display:flex;justify-content:space-between;align-items:center}
+  .cat .label .c .arrow{color:var(--gold)}
+
+  /* PRODUCTS */
+  .filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:36px}
+  .chip{
+    border:1px solid var(--line);padding:9px 16px;border-radius:999px;
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--cream-2);
+    cursor:pointer;background:transparent;transition:all .2s ease;
+  }
+  .chip:hover{border-color:var(--gold);color:var(--cream)}
+  .chip.on{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+
+  .prod-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+  @media (max-width:980px){.prod-grid{grid-template-columns:1fr}}
+  .prod{position:relative;cursor:pointer}
+  .prod .img{
+    position:relative;aspect-ratio:4/5;overflow:hidden;
+    background:linear-gradient(160deg, #fff, #f4f1eb);
+    border:1px solid var(--line);
+    border-radius:14px;
+  }
+  .prod:hover .img{border-color:var(--gold)}
+  .prod .img .center{
+    position:absolute;inset:0;display:grid;place-items:center;color:var(--gold-2);
+    transition:transform .5s ease;
+  }
+  .prod:hover .img .center{transform:scale(1.05)}
+  .prod .img .center svg{width:62%;filter:drop-shadow(0 20px 24px rgba(0,0,0,.5))}
+  .prod .tag{position:absolute;top:12px;left:12px;font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;color:var(--gold);background:rgba(8,29,29,.7);padding:5px 9px;border:1px solid var(--line)}
+  .prod .add{
+    position:absolute;left:50%;bottom:14px;transform:translate(-50%,16px);opacity:0;
+    background:var(--cream);color:var(--ink);padding:10px 18px;
+    font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+    transition:transform .35s ease,opacity .35s ease;
+    cursor:pointer;border:0;
+  }
+  .prod:hover .add{transform:translate(-50%,0);opacity:1}
+  .prod .add:hover{background:var(--gold);color:var(--ink)}
+  .prod .meta{padding:14px 2px 0;display:flex;justify-content:space-between;gap:14px;align-items:baseline}
+  .prod .meta .name{font-family:var(--serif);font-size:19px;color:var(--ink);font-weight:500}
+  .prod .meta .price{font-family:var(--serif);font-size:17px;color:var(--maroon)}
+  .prod .sub{font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;color:var(--muted);margin-top:4px}
+
+  /* ATELIER */
+  .atelier{display:grid;grid-template-columns:1.05fr 1fr;gap:80px;align-items:center}
+  @media (max-width:980px){.atelier{grid-template-columns:1fr;gap:50px}}
+  .atelier-vis{
+    aspect-ratio:5/6;border:1px solid var(--line-2);position:relative;overflow:hidden;
+    background:
+      radial-gradient(circle at 30% 30%, rgba(200,166,107,.18), transparent 60%),
+      linear-gradient(160deg,#0a2020,#061515);
+  }
+  .atelier-vis .placeholder{
+    position:absolute;left:0;right:0;bottom:24px;text-align:center;
+    font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:rgba(244,237,225,.4);
+  }
+  .atelier-vis::before{
+    content:"";position:absolute;inset:0;
+    background:repeating-linear-gradient(45deg, rgba(255,255,255,.018) 0 2px, transparent 2px 7px);
+  }
+  .atelier-vis svg{position:absolute;left:50%;top:50%;transform:translate(-50%,-55%);width:55%;color:var(--gold)}
+  .atelier h2{font-family:var(--serif);font-weight:400;font-size:clamp(36px,4.4vw,64px);line-height:1.02;margin:18px 0 22px;color:var(--cream)}
+  .atelier h2 em{font-style:italic;color:var(--gold);font-weight:300}
+  .atelier p{font-family:var(--serif);font-size:18px;line-height:1.6;color:var(--cream-2);font-weight:300;max-width:520px}
+  .atelier .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:46px;border-top:1px solid var(--line);padding-top:30px}
+  .atelier .stats .v{font-family:var(--serif);font-size:36px;color:var(--gold);line-height:1}
+  .atelier .stats .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;color:var(--muted);margin-top:8px;text-transform:uppercase}
+
+  /* BESPOKE */
+  .bespoke{
+    background:linear-gradient(180deg,var(--bg-3),var(--bg));
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    padding:140px 0;position:relative;overflow:hidden;
+  }
+  .bespoke::before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(800px 500px at 80% 30%, rgba(200,166,107,.10), transparent 60%);
+    pointer-events:none;
+  }
+  .bespoke-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;position:relative}
+  @media (max-width:980px){.bespoke-grid{grid-template-columns:1fr;gap:40px}}
+  .bespoke h2{font-family:var(--serif);font-weight:400;font-size:clamp(42px,5.4vw,80px);line-height:1;margin:18px 0 26px;color:var(--cream)}
+  .bespoke h2 em{font-style:italic;color:var(--gold);font-weight:300}
+  .bespoke p{font-family:var(--serif);font-size:19px;line-height:1.6;color:var(--cream-2);font-weight:300;margin:0 0 36px;max-width:520px}
+  .steps{display:flex;flex-direction:column;gap:0}
+  .step{display:grid;grid-template-columns:60px 1fr auto;align-items:center;gap:18px;padding:22px 0;border-top:1px solid var(--line);transition:padding-left .25s ease}
+  .step:last-child{border-bottom:1px solid var(--line)}
+  .step:hover{padding-left:10px}
+  .step .n{font-family:var(--serif);font-size:30px;color:var(--gold);font-weight:300}
+  .step .t{font-family:var(--serif);font-size:22px;color:var(--cream)}
+  .step .d{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;color:var(--muted);margin-top:4px;text-transform:uppercase}
+  .step .ar{color:var(--gold);font-size:18px;opacity:.7;transition:transform .25s ease, opacity .25s ease}
+  .step:hover .ar{transform:translateX(5px);opacity:1}
+
+  /* TESTIMONIALS */
+  .quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+  @media (max-width:980px){.quotes{grid-template-columns:1fr}}
+  .q{border:1px solid var(--line-2);padding:38px 32px;position:relative;background:rgba(8,29,29,.4)}
+  .q:hover{border-color:var(--line);background:rgba(8,29,29,.55)}
+  .q .mark{font-family:var(--serif);font-size:80px;line-height:.5;color:var(--gold);position:absolute;top:32px;left:24px;opacity:.3}
+  .q .stars{display:flex;gap:4px;color:var(--gold);margin-bottom:18px;position:relative}
+  .q .body{font-family:var(--serif);font-size:21px;line-height:1.5;color:var(--cream);font-weight:300;font-style:italic}
+  .q .by{margin-top:24px;display:flex;align-items:center;gap:14px;border-top:1px solid var(--line-2);padding-top:18px}
+  .q .av{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-2));display:grid;place-items:center;color:var(--ink);font-family:var(--serif);font-weight:600;font-size:15px}
+  .q .n{font-family:var(--serif);font-size:17px;color:var(--cream)}
+  .q .r{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;color:var(--muted);margin-top:3px;text-transform:uppercase}
+
+  /* NEWSLETTER */
+  .news{padding:140px 0;text-align:center;border-top:1px solid var(--line)}
+  .news h2{font-family:var(--serif);font-weight:400;font-size:clamp(42px,5.2vw,80px);line-height:1;margin:0 0 22px}
+  .news h2 em{font-style:italic;color:var(--gold);font-weight:300}
+  .news p{font-family:var(--serif);font-size:19px;color:var(--cream-2);max-width:520px;margin:0 auto 38px;font-weight:300;line-height:1.5}
+  .news form{display:flex;gap:0;max-width:520px;margin:0 auto;border:1px solid var(--line);background:rgba(8,29,29,.4)}
+  .news form:focus-within{border-color:var(--gold)}
+  .news input{
+    flex:1;background:transparent;border:0;outline:none;padding:18px 22px;color:var(--cream);
+    font-family:var(--sans);font-size:14px;letter-spacing:.04em;
+  }
+  .news input::placeholder{color:rgba(244,237,225,.4)}
+  .news button{
+    background:var(--gold);color:var(--ink);border:0;padding:0 30px;cursor:pointer;
+    font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+  }
+  .news button:hover{background:var(--gold-2)}
+  .news .ok{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--gold);margin-top:18px;text-transform:uppercase;height:14px}
+
+  /* FOOTER */
+  footer{padding:80px 0 30px;border-top:1px solid var(--line-2);background:var(--bg-2)}
+  .foot-top{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:60px}
+  @media (max-width:980px){.foot-top{grid-template-columns:1fr 1fr;gap:40px}}
+  .foot-top h4{font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;color:var(--gold);text-transform:uppercase;margin:0 0 22px;font-weight:500}
+  .foot-top ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px}
+  .foot-top li{font-family:var(--serif);font-size:16px;color:var(--cream-2);cursor:pointer}
+  .foot-top li:hover{color:var(--gold)}
+  .foot-top .col1 p{font-family:var(--serif);font-size:17px;color:var(--cream-2);line-height:1.55;font-weight:300;max-width:340px}
+  .socials{display:flex;gap:10px;margin-top:22px}
+  .socials a{width:36px;height:36px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;color:var(--cream-2)}
+  .socials a:hover{border-color:var(--gold);color:var(--gold)}
+  .foot-mark{
+    margin-top:80px;display:flex;align-items:center;justify-content:center;
+    font-family:var(--serif);font-size:clamp(72px,16vw,260px);letter-spacing:.05em;color:transparent;
+    -webkit-text-stroke:1px var(--gold);font-weight:400;line-height:1;user-select:none;
+  }
+  .foot-bot{margin-top:50px;display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--muted);text-transform:uppercase;border-top:1px solid var(--line-2);padding-top:24px;flex-wrap:wrap;gap:12px}
+
+  /* Premium focus visibility */
+  a:focus-visible,button:focus-visible,input:focus-visible{
+    outline:2px solid var(--gold);
+    outline-offset:2px;
+  }
+
+  /* Cart drawer */
+  .scrim{position:fixed;inset:0;background:rgba(5,15,15,.7);backdrop-filter:blur(4px);z-index:100;opacity:0;pointer-events:none;transition:opacity .35s ease}
+  .scrim.on{opacity:1;pointer-events:auto}
+  .cart{
+    position:fixed;top:0;right:0;height:100%;width:min(440px,92vw);
+    background:var(--bg-2);border-left:1px solid var(--line);z-index:101;
+    transform:translateX(100%);transition:transform .4s cubic-bezier(.2,.7,.1,1);
+    display:flex;flex-direction:column;
+  }
+  .cart.on{transform:translateX(0)}
+  .cart-hd{display:flex;justify-content:space-between;align-items:center;padding:24px 28px;border-bottom:1px solid var(--line-2)}
+  .cart-hd .t{font-family:var(--serif);font-size:24px;color:var(--cream)}
+  .cart-hd .x{background:transparent;border:0;color:var(--cream-2);cursor:pointer;font-size:24px;line-height:1}
+  .cart-body{flex:1;overflow:auto;padding:18px 28px;display:flex;flex-direction:column;gap:16px}
+  .cart-empty{margin-top:40px;text-align:center;color:var(--muted);font-family:var(--serif);font-size:18px;line-height:1.5}
+  .cart-empty .ico{margin:0 auto 18px;width:64px;height:64px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;color:var(--gold)}
+  .cart-item{display:grid;grid-template-columns:80px 1fr auto;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line-2)}
+  .cart-item .thumb{aspect-ratio:1;background:linear-gradient(160deg,#0c2828,#081d1d);border:1px solid var(--line-2);display:grid;place-items:center;color:var(--gold)}
+  .cart-item .info .n{font-family:var(--serif);font-size:17px;color:var(--cream)}
+  .cart-item .info .p{font-family:var(--serif);font-size:14px;color:var(--gold-2);margin-top:4px}
+  .qty{display:inline-flex;align-items:center;gap:8px;margin-top:6px}
+  .qty button{width:22px;height:22px;border:1px solid var(--line);background:transparent;color:var(--cream-2);cursor:pointer;font-size:13px;line-height:1}
+  .qty button:hover{border-color:var(--gold);color:var(--gold)}
+  .qty .v{font-family:var(--mono);font-size:11px;color:var(--cream);min-width:14px;text-align:center}
+  .rm{background:transparent;border:0;color:var(--muted);cursor:pointer;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase}
+  .rm:hover{color:var(--gold)}
+  .cart-ft{padding:24px 28px;border-top:1px solid var(--line-2)}
+  .cart-ft .row{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+  .cart-ft .row .l{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--muted);text-transform:uppercase}
+  .cart-ft .row .v{font-family:var(--serif);font-size:24px;color:var(--gold)}
+  .cart-ft .btn{width:100%;justify-content:center}
+
+  /* Quick view modal */
+  .qv-scrim{position:fixed;inset:0;background:rgba(5,15,15,.78);backdrop-filter:blur(6px);z-index:120;display:none;align-items:center;justify-content:center;padding:24px}
+  .qv-scrim.on{display:flex}
+  .qv{
+    width:min(900px,100%);background:var(--bg-2);border:1px solid var(--line);
+    display:grid;grid-template-columns:1fr 1fr;max-height:90vh;overflow:auto;
+  }
+  @media (max-width:720px){.qv{grid-template-columns:1fr}}
+  .qv .vis{aspect-ratio:1;background:radial-gradient(circle at 50% 50%, rgba(200,166,107,.14), transparent 60%), linear-gradient(160deg,#0c2828,#081d1d);display:grid;place-items:center;color:var(--gold-2);position:relative}
+  .qv .vis svg{width:60%;filter:drop-shadow(0 20px 24px rgba(0,0,0,.5))}
+  .qv .body{padding:36px;display:flex;flex-direction:column;gap:14px;position:relative}
+  .qv .x{position:absolute;top:14px;right:14px;background:transparent;border:0;color:var(--cream-2);font-size:22px;cursor:pointer;line-height:1}
+  .qv .eyebrow{margin-bottom:0}
+  .qv h3{font-family:var(--serif);font-size:34px;color:var(--cream);font-weight:400;margin:6px 0 4px;line-height:1}
+  .qv .price{font-family:var(--serif);font-size:22px;color:var(--gold-2)}
+  .qv .desc{font-family:var(--serif);font-size:16px;color:var(--cream-2);line-height:1.55;font-weight:300}
+  .qv .specs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
+  .qv .specs div{font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;color:var(--muted);text-transform:uppercase}
+  .qv .specs div b{display:block;color:var(--cream);font-family:var(--serif);font-size:15px;letter-spacing:.02em;text-transform:none;font-weight:400;margin-top:2px}
+  .qv .sizes{display:flex;gap:8px;flex-wrap:wrap}
+  .qv .sz{padding:8px 12px;border:1px solid var(--line);font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--cream-2);cursor:pointer}
+  .qv .sz.on{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+  .qv .actions{display:flex;gap:10px;margin-top:8px}
+  .qv .actions .btn{flex:1;justify-content:center}
+
+  /* Toast */
+  .toast{position:fixed;bottom:30px;left:50%;transform:translate(-50%,30px);
+    background:var(--cream);color:var(--ink);padding:12px 22px;border-radius:0;
+    font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+    z-index:200;opacity:0;transition:opacity .3s ease, transform .3s ease;
+    border-left:3px solid var(--gold);
+  }
+  .toast.on{opacity:1;transform:translate(-50%,0)}
+
+  /* utility */
+  .center{display:grid;place-items:center}
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity .9s cubic-bezier(.2,.7,.1,1),transform .9s cubic-bezier(.2,.7,.1,1)}
+  .reveal.on{opacity:1;transform:translateY(0)}
+
+  /* ─── 3D GEM ─────────────────────────── */
+  .gem-3d{position:absolute;inset:0;width:100%;height:100%}
+  .gem-3d canvas{width:100% !important;height:100% !important;display:block}
+  .gem-glow{position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(circle at 50% 50%, rgba(200,166,107,.18) 0%, transparent 55%);
+    mix-blend-mode:screen;
+  }
+  /* Sparkle particles */
+  .sparkles{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+  .spark{position:absolute;width:4px;height:4px;border-radius:50%;
+    background:var(--gold-2);
+    box-shadow:0 0 8px 2px var(--gold), 0 0 18px 4px rgba(230,204,142,.5);
+    opacity:0;animation:twinkle var(--d,4s) ease-in-out var(--dl,0s) infinite;
+  }
+  .spark.big{width:6px;height:6px;box-shadow:0 0 12px 3px var(--gold), 0 0 24px 6px rgba(230,204,142,.55)}
+  .spark.cross::before,.spark.cross::after{content:"";position:absolute;left:50%;top:50%;background:var(--gold-2);
+    box-shadow:0 0 6px var(--gold);
+  }
+  .spark.cross::before{width:1px;height:18px;transform:translate(-50%,-50%)}
+  .spark.cross::after{width:18px;height:1px;transform:translate(-50%,-50%)}
+  @keyframes twinkle{
+    0%,100%{opacity:0;transform:scale(.4) rotate(0)}
+    40%{opacity:1;transform:scale(1.1) rotate(45deg)}
+    60%{opacity:.85;transform:scale(1) rotate(60deg)}
+  }
+
+  /* Cursor spotlight */
+  .spotlight{position:fixed;left:0;top:0;width:520px;height:520px;border-radius:50%;
+    background:radial-gradient(circle, rgba(200,166,107,.10) 0%, rgba(200,166,107,.04) 35%, transparent 65%);
+    transform:translate(-50%,-50%);pointer-events:none;z-index:1;
+    transition:opacity .3s ease;mix-blend-mode:screen;
+  }
+  body.motion-off .spotlight,body.motion-off .spark{display:none}
+
+  /* Shimmer text (sweeping gold gradient) */
+  .shimmer{
+    background:linear-gradient(110deg, var(--gold) 30%, #fff6dc 48%, var(--gold-2) 56%, var(--gold) 70%);
+    background-size:250% 100%;
+    -webkit-background-clip:text;background-clip:text;
+    color:transparent;
+    animation:shimmer 5.5s linear infinite;
+  }
+  @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-100% 0}}
+  body.motion-off .shimmer{animation:none;background-position:0 0}
+
+  /* Card tilt + sheen sweep */
+  .prod{transform-style:preserve-3d;transition:transform .38s cubic-bezier(.2,.7,.1,1)}
+  .prod .img{transform:translateZ(0);will-change:transform}
+  .prod .img::after{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(115deg, transparent 35%, rgba(255,240,200,.16) 50%, transparent 65%);
+    transform:translateX(-110%);transition:transform .9s cubic-bezier(.2,.7,.1,1);
+    z-index:3;
+  }
+  .prod:hover .img::after{transform:translateX(110%)}
+  body.motion-off .prod .img::after{display:none}
+
+  /* Magnetic buttons */
+  .btn{transition:background .25s ease,color .25s ease,transform .35s cubic-bezier(.2,.7,.1,1)}
+
+  /* Stage parallax */
+  .stage-badge,.stage-cap{will-change:transform}
+
+  /* Hero text-mask gold ::: subtle */
+  .hero h1 em{
+    background:linear-gradient(120deg, var(--gold) 0%, #fff3cf 50%, var(--gold) 100%);
+    background-size:200% 100%;
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    animation:shimmer 7s linear infinite;
+  }
+  body.motion-off .hero h1 em{animation:none}
+
+  /* Big footer mark - subtle horizontal drift */
+  .foot-mark{animation:drift 22s ease-in-out infinite}
+  @keyframes drift{0%,100%{letter-spacing:.05em}50%{letter-spacing:.07em}}
+  body.motion-off .foot-mark{animation:none}
+
+  /* Diamond / nav logo hover spin */
+  .logo:hover .logo-mark{transform:rotateY(360deg);transition:transform .9s cubic-bezier(.2,.7,.1,1)}
+  .logo-mark{transition:transform .6s ease}
+
+  /* Stagger reveal helpers */
+  .stagger > *{opacity:0;transform:translateY(18px);transition:opacity .8s cubic-bezier(.2,.7,.1,1),transform .8s cubic-bezier(.2,.7,.1,1)}
+  .stagger.on > *{opacity:1;transform:translateY(0)}
+  .stagger.on > *:nth-child(1){transition-delay:.05s}
+  .stagger.on > *:nth-child(2){transition-delay:.13s}
+  .stagger.on > *:nth-child(3){transition-delay:.21s}
+  .stagger.on > *:nth-child(4){transition-delay:.29s}
+  .stagger.on > *:nth-child(5){transition-delay:.37s}
+  .stagger.on > *:nth-child(6){transition-delay:.45s}
+  .stagger.on > *:nth-child(7){transition-delay:.53s}
+  .stagger.on > *:nth-child(8){transition-delay:.61s}
+
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation-duration:.01s !important;animation-iteration-count:1 !important;transition-duration:.01s !important}
+  }
+  @media (max-width:980px){
+    .quotes{grid-template-columns:1fr 1fr}
+  }
+  @media (max-width:720px){
+    .quotes{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+  <div id="app"></div>
+
+  <!-- React + Babel -->
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+
+  <script type="text/babel" src="tweaks-panel.jsx"></script>
+  <script type="text/babel">
+// Iconography — line icons for jewelry categories, nav, and UI
+
+const Icon = {
+  Search: () => (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4">
+      <circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>
+    </svg>
+  ),
+  User: () => (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4">
+      <circle cx="12" cy="8" r="4"/><path d="M4 21c1.2-4.4 4.6-7 8-7s6.8 2.6 8 7"/>
+    </svg>
+  ),
+  Bag: () => (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4">
+      <path d="M5 8h14l-1.2 12H6.2L5 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/>
+    </svg>
+  ),
+  Heart: () => (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4">
+      <path d="M12 20s-7-4.5-9-9.2C1.4 7.3 4 4 7.2 4 9 4 10.6 4.9 12 6.4 13.4 4.9 15 4 16.8 4 20 4 22.6 7.3 21 10.8 19 15.5 12 20 12 20Z"/>
+    </svg>
+  ),
+  Instagram: () => (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4">
+      <rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
+    </svg>
+  ),
+  Pinterest: () => (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4">
+      <circle cx="12" cy="12" r="9"/><path d="M11 21c-.5-1.5 0-3.5.5-5.5L13.5 8"/>
+      <path d="M9 13c.5 1.4 2 2.2 3.5 2.2 2.5 0 4.5-2.3 4.5-5 0-2.7-2-4.7-5-4.7-3.3 0-5.5 2.4-5.5 5 0 1.2.5 2.4 1.4 3"/>
+    </svg>
+  ),
+  TikTok: () => (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4">
+      <path d="M14 4v10a4 4 0 1 1-4-4"/><path d="M14 4c0 2.5 2 4.5 4.5 4.5"/>
+    </svg>
+  ),
+  ArrowRight: () => (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4">
+      <path d="M5 12h14M13 6l6 6-6 6"/>
+    </svg>
+  ),
+  Star: () => (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2l2.9 6.4 7 .8-5.2 4.8 1.5 6.9L12 17.6 5.8 21l1.5-6.9L2.1 9.2l7-.8L12 2z"/>
+    </svg>
+  ),
+  Diamond: () => (
+    <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round" strokeLinecap="round">
+      <path d="M14 22h36L32 56 14 22Z"/>
+      <path d="M14 22l8-10h20l8 10"/>
+      <path d="M22 12l-8 10M42 12l8 10"/>
+      <path d="M22 22h20"/>
+      <path d="M22 22l10 34 10-34"/>
+      <path d="M14 22l18 8 18-8"/>
+    </svg>
+  ),
+};
+
+/* Jewelry-specific category & product SVGs (line-art placeholders) */
+const RingIcon = ({ size = 200 }) => (
+  <svg viewBox="0 0 200 200" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="1.2">
+    <ellipse cx="100" cy="130" rx="48" ry="42"/>
+    <ellipse cx="100" cy="130" rx="36" ry="32" opacity=".45"/>
+    <path d="M82 92l18-26 18 26-18 14-18-14Z" fill="currentColor" fillOpacity=".25"/>
+    <path d="M82 92l18-26 18 26-18 14-18-14Z"/>
+    <path d="M100 66v40M82 92l36 14M118 92l-36 14"/>
+  </svg>
+);
+
+const NecklaceIcon = ({ size = 200 }) => (
+  <svg viewBox="0 0 200 200" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="1.2">
+    <path d="M30 40c20 60 50 90 70 90s50-30 70-90"/>
+    <circle cx="100" cy="146" r="22"/>
+    <circle cx="100" cy="146" r="13" opacity=".5"/>
+    <path d="M100 130v32M84 146h32" opacity=".5"/>
+  </svg>
+);
+
+const EarringIcon = ({ size = 200 }) => (
+  <svg viewBox="0 0 200 200" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="1.2">
+    <g>
+      <path d="M68 50c0 14-10 22-10 32 0 8 6 14 14 14s14-6 14-14c0-10-10-18-10-32a4 4 0 0 0-8 0Z"/>
+      <circle cx="72" cy="128" r="20"/>
+      <circle cx="72" cy="128" r="11" opacity=".5"/>
+      <path d="M72 110v36M54 128h36" opacity=".5"/>
+    </g>
+    <g>
+      <path d="M124 50c0 14-10 22-10 32 0 8 6 14 14 14s14-6 14-14c0-10-10-18-10-32a4 4 0 0 0-8 0Z"/>
+      <circle cx="128" cy="128" r="20"/>
+      <circle cx="128" cy="128" r="11" opacity=".5"/>
+      <path d="M128 110v36M110 128h36" opacity=".5"/>
+    </g>
+  </svg>
+);
+
+const BraceletIcon = ({ size = 200 }) => (
+  <svg viewBox="0 0 200 200" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="1.2">
+    <ellipse cx="100" cy="100" rx="74" ry="32"/>
+    <ellipse cx="100" cy="100" rx="62" ry="24" opacity=".35"/>
+    {[26, 50, 74, 100, 126, 150, 174].map((x, i) => (
+      <circle key={i} cx={x} cy="100" r={i === 3 ? 7 : 4} fill="currentColor" fillOpacity={i === 3 ? .35 : .18}/>
+    ))}
+  </svg>
+);
+
+const PendantIcon = ({ size = 200 }) => (
+  <svg viewBox="0 0 200 200" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="1.2">
+    <path d="M30 50c30 30 70 30 140 0"/>
+    <path d="M100 90l-18 20 18 36 18-36-18-20Z" fill="currentColor" fillOpacity=".22"/>
+    <path d="M100 90l-18 20 18 36 18-36-18-20Z"/>
+    <path d="M82 110h36M100 90v56" opacity=".4"/>
+  </svg>
+);
+
+const StoneRing = () => (
+  <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" strokeWidth="1.1">
+    <ellipse cx="100" cy="138" rx="44" ry="38"/>
+    <ellipse cx="100" cy="138" rx="33" ry="28" opacity=".5"/>
+    <path d="M84 96l16-26 16 26-16 14-16-14Z" fill="currentColor" fillOpacity=".25"/>
+    <path d="M84 96l16-26 16 26-16 14-16-14Z"/>
+    <path d="M100 70v40M84 96l32 14M116 96l-32 14"/>
+  </svg>
+);
+const ChainNecklace = () => (
+  <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" strokeWidth="1.1">
+    <path d="M28 36c20 64 52 96 72 96s52-32 72-96"/>
+    <circle cx="100" cy="148" r="20"/>
+    <path d="M100 134v28M86 148h28" opacity=".4"/>
+    <circle cx="100" cy="148" r="11" opacity=".55"/>
+  </svg>
+);
+const TennisBracelet = () => (
+  <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" strokeWidth="1.1">
+    <ellipse cx="100" cy="100" rx="78" ry="34"/>
+    {Array.from({length: 11}).map((_, i) => {
+      const x = 22 + i * 15.6;
+      return <path key={i} d={`M${x} 94l4 6-4 6-4-6 4-6Z`} fill="currentColor" fillOpacity=".22"/>
+    })}
+    {Array.from({length: 11}).map((_, i) => {
+      const x = 22 + i * 15.6;
+      return <path key={i} d={`M${x} 94l4 6-4 6-4-6 4-6Z`}/>
+    })}
+  </svg>
+);
+const Studs = () => (
+  <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" strokeWidth="1.1">
+    <g transform="translate(64,100)">
+      <path d="M-12 0l12-16 12 16-12 12-12-12Z" fill="currentColor" fillOpacity=".25"/>
+      <path d="M-12 0l12-16 12 16-12 12-12-12Z"/>
+      <path d="M0-16V12M-12 0l24 12M12 0L-12 12"/>
+    </g>
+    <g transform="translate(136,100)">
+      <path d="M-12 0l12-16 12 16-12 12-12-12Z" fill="currentColor" fillOpacity=".25"/>
+      <path d="M-12 0l12-16 12 16-12 12-12-12Z"/>
+      <path d="M0-16V12M-12 0l24 12M12 0L-12 12"/>
+    </g>
+  </svg>
+);
+const Pendant = () => (
+  <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" strokeWidth="1.1">
+    <path d="M28 56c30 30 70 30 144 0"/>
+    <circle cx="100" cy="118" r="32"/>
+    <circle cx="100" cy="118" r="20" opacity=".5"/>
+    <path d="M100 86v64M68 118h64" opacity=".4"/>
+    <circle cx="100" cy="118" r="6" fill="currentColor" fillOpacity=".5"/>
+  </svg>
+);
+const SignetRing = () => (
+  <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" strokeWidth="1.1">
+    <ellipse cx="100" cy="130" rx="48" ry="42"/>
+    <ellipse cx="100" cy="130" rx="36" ry="32" opacity=".45"/>
+    <rect x="78" y="68" width="44" height="36" rx="3" fill="currentColor" fillOpacity=".22"/>
+    <rect x="78" y="68" width="44" height="36" rx="3"/>
+    <path d="M88 86l8-8 8 8-8 8-8-8Z" opacity=".7"/>
+  </svg>
+);
+const Bangle = () => (
+  <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" strokeWidth="1.1">
+    <ellipse cx="100" cy="100" rx="70" ry="30"/>
+    <ellipse cx="100" cy="100" rx="60" ry="22" opacity=".35"/>
+    <circle cx="100" cy="78" r="8" fill="currentColor" fillOpacity=".3"/>
+    <circle cx="100" cy="78" r="8"/>
+  </svg>
+);
+const Hoops = () => (
+  <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" strokeWidth="1.1">
+    <circle cx="72" cy="110" r="32"/>
+    <circle cx="72" cy="110" r="22" opacity=".4"/>
+    <circle cx="128" cy="110" r="32"/>
+    <circle cx="128" cy="110" r="22" opacity=".4"/>
+  </svg>
+);
+
+Object.assign(window, {
+  Icon, RingIcon, NecklaceIcon, EarringIcon, BraceletIcon, PendantIcon,
+  StoneRing, ChainNecklace, TennisBracelet, Studs, Pendant, SignetRing, Bangle, Hoops
+});
+
+
+// sections.jsx — Bold Pieces landing page sections
+
+const { useState, useEffect, useRef, useMemo } = React;
+
+/* ───────────────── PRODUCT DATA ───────────────── */
+const PRODUCTS = [
+  { id: 'p1', name: 'Solène Solitaire',  category: 'Rings',     price: 2480, sub: '18k yellow gold · 0.7ct',  badge: 'New',       Art: StoneRing },
+  { id: 'p2', name: 'Aria Drape',         category: 'Necklaces', price: 1180, sub: 'Snake chain · 18in',       badge: null,        Art: ChainNecklace },
+  { id: 'p3', name: 'Petal Studs',        category: 'Earrings',  price:  720, sub: 'Pavé · 14k gold',          badge: null,        Art: Studs },
+  { id: 'p4', name: 'Lumen Tennis',       category: 'Bracelets', price: 3650, sub: '4.5ct total weight',       badge: 'Limited',   Art: TennisBracelet },
+  { id: 'p5', name: 'Halo Pendant',       category: 'Pendants',  price: 1490, sub: '0.5ct · 16in chain',       badge: null,        Art: Pendant },
+  { id: 'p6', name: 'Maris Signet',       category: 'Rings',     price:  980, sub: 'Hand-engraved · 18k',      badge: null,        Art: SignetRing },
+  { id: 'p7', name: 'Orbit Bangle',       category: 'Bracelets', price: 1280, sub: '18k · single stone',       badge: 'New',       Art: Bangle },
+  { id: 'p8', name: 'Mira Hoops',         category: 'Earrings',  price:  640, sub: 'Polished · 14k',           badge: null,        Art: Hoops },
+];
+
+/* ─────────────── 3D GEM (Three.js) ─────────────── */
+function Diamond3D(){
+  const mountRef = useRef(null);
+  useEffect(() => {
+    const THREE = window.THREE;
+    const mount = mountRef.current;
+    if (!THREE || !mount) return;
+
+    let w = mount.clientWidth || 400;
+    let h = mount.clientHeight || 500;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(38, w/h, 0.1, 100);
+    camera.position.set(0, 0, 5);
+
+    const renderer = new THREE.WebGLRenderer({ alpha:true, antialias:true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(w, h);
+    renderer.setClearColor(0x000000, 0);
+    mount.appendChild(renderer.domElement);
+
+    const gemGroup = new THREE.Group();
+    const goldHex = (function(){
+      const c = getComputedStyle(document.documentElement).getPropertyValue('--gold').trim() || '#C8A66B';
+      return new THREE.Color(c);
+    })();
+    const gold2Hex = (function(){
+      const c = getComputedStyle(document.documentElement).getPropertyValue('--gold-2').trim() || '#E6CC8E';
+      return new THREE.Color(c);
+    })();
+
+    const matCrown = new THREE.MeshStandardMaterial({
+      color: gold2Hex, metalness: 1.0, roughness: 0.18,
+      emissive: goldHex, emissiveIntensity: 0.18, flatShading: true,
+    });
+    const matPav = new THREE.MeshStandardMaterial({
+      color: goldHex, metalness: 1.0, roughness: 0.22,
+      emissive: 0x4a2e08, emissiveIntensity: 0.25, flatShading: true,
+    });
+
+    // Crown (top): shallow cone, 8 facets
+    const crownGeo = new THREE.ConeGeometry(1.0, 0.55, 8, 1, false);
+    const crown = new THREE.Mesh(crownGeo, matCrown);
+    crown.rotation.y = Math.PI/8;
+    crown.position.y = 0.275;
+    gemGroup.add(crown);
+
+    // Pavilion (bottom): tall inverted cone
+    const pavGeo = new THREE.ConeGeometry(1.0, 1.5, 8, 1, false);
+    const pav = new THREE.Mesh(pavGeo, matPav);
+    pav.rotation.x = Math.PI;
+    pav.rotation.y = Math.PI/8;
+    pav.position.y = -0.75;
+    gemGroup.add(pav);
+
+    // Girdle ring
+    const ringGeo = new THREE.TorusGeometry(1.0, 0.03, 12, 32);
+    const ringMat = new THREE.MeshStandardMaterial({ color: gold2Hex, metalness:1, roughness:0.15 });
+    const ring = new THREE.Mesh(ringGeo, ringMat);
+    ring.rotation.x = Math.PI/2;
+    gemGroup.add(ring);
+
+    gemGroup.scale.setScalar(1.3);
+    scene.add(gemGroup);
+
+    // Lights
+    scene.add(new THREE.AmbientLight(0xfff0d0, 0.35));
+    const key = new THREE.PointLight(0xfff0d0, 2.6, 22); key.position.set(3.5, 3, 3.5); scene.add(key);
+    const fill = new THREE.PointLight(0xc8a66b, 1.8, 22); fill.position.set(-3, -2, 2); scene.add(fill);
+    const rim = new THREE.PointLight(0xe6cc8e, 1.6, 22); rim.position.set(0, 2, -3); scene.add(rim);
+    const accent = new THREE.PointLight(0xffe4a0, 1.2, 16); accent.position.set(0, 0, 4); scene.add(accent);
+
+    let mx = 0, my = 0, tmx = 0, tmy = 0;
+    const onMove = (e) => {
+      const r = mount.getBoundingClientRect();
+      tmx = ((e.clientX - r.left) / r.width  - 0.5) * 2;
+      tmy = ((e.clientY - r.top)  / r.height - 0.5) * 2;
+    };
+    window.addEventListener('pointermove', onMove);
+
+    let raf, start = performance.now();
+    const tick = () => {
+      const t = (performance.now() - start) * 0.001;
+      mx += (tmx - mx) * 0.06;
+      my += (tmy - my) * 0.06;
+      gemGroup.rotation.y = t * 0.45 + mx * 0.6;
+      gemGroup.rotation.x = -0.05 + my * 0.4 + Math.sin(t*0.6)*0.04;
+      gemGroup.position.y = Math.sin(t*0.8) * 0.08;
+      key.position.x = Math.cos(t*0.7) * 4;
+      key.position.z = Math.sin(t*0.7) * 4;
+      rim.position.x = Math.cos(t*0.4 + 2) * 3.5;
+      renderer.render(scene, camera);
+      raf = requestAnimationFrame(tick);
+    };
+    tick();
+
+    const onResize = () => {
+      w = mount.clientWidth; h = mount.clientHeight;
+      if (!w || !h) return;
+      renderer.setSize(w, h);
+      camera.aspect = w/h; camera.updateProjectionMatrix();
+    };
+    const ro = new ResizeObserver(onResize);
+    ro.observe(mount);
+
+    const themeObs = new MutationObserver(() => {
+      const g  = getComputedStyle(document.documentElement).getPropertyValue('--gold').trim();
+      const g2 = getComputedStyle(document.documentElement).getPropertyValue('--gold-2').trim();
+      if (g)  { matPav.color.set(g);  ringMat.color.set(g2 || g); }
+      if (g2) { matCrown.color.set(g2); }
+    });
+    themeObs.observe(document.documentElement, { attributes:true, attributeFilter:['style'] });
+
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener('pointermove', onMove);
+      ro.disconnect(); themeObs.disconnect();
+      crownGeo.dispose(); pavGeo.dispose(); ringGeo.dispose();
+      matCrown.dispose(); matPav.dispose(); ringMat.dispose();
+      renderer.dispose();
+      if (renderer.domElement.parentNode) renderer.domElement.parentNode.removeChild(renderer.domElement);
+    };
+  }, []);
+  return <div className="gem-3d" ref={mountRef}/>;
+}
+
+/* ─────────── SPARKLES ─────────── */
+function Sparkles({ count = 14 }){
+  const sparks = useMemo(() => {
+    return Array.from({length:count}).map(() => ({
+      top: Math.random() * 90 + 5,
+      left: Math.random() * 90 + 5,
+      delay: (Math.random() * 5).toFixed(2),
+      dur: (2.4 + Math.random() * 3).toFixed(2),
+      big: Math.random() < 0.25,
+      cross: Math.random() < 0.5,
+    }));
+  }, [count]);
+  return (
+    <div className="sparkles" aria-hidden="true">
+      {sparks.map((s,i) => (
+        <span key={i}
+          className={'spark ' + (s.big?'big ':'') + (s.cross?'cross':'')}
+          style={{
+            top: s.top + '%',
+            left: s.left + '%',
+            '--dl': s.delay + 's',
+            '--d': s.dur + 's',
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
+/* ───────────────── ANNOUNCEMENT MARQUEE ───────────────── */
+function Announce(){
+  const items = [
+    'Complimentary engraving on every order',
+    'Hand-forged in our Antwerp atelier',
+    'Free shipping over $250',
+    'Lifetime guarantee on every piece',
+    'Conflict-free, traceable stones',
+  ];
+  const row = (
+    <>
+      {items.map((t,i)=>(
+        <React.Fragment key={i}>
+          <span className="dot">◆</span>
+          <span>{t}</span>
+        </React.Fragment>
+      ))}
+    </>
+  );
+  return (
+    <div className="announce">
+      <div className="track">{row}{row}</div>
+    </div>
+  );
+}
+
+/* ───────────────── NAV ───────────────── */
+function Nav({ cartCount, onOpenCart }){
+  return (
+    <header className="nav">
+      <div className="nav-inner">
+        <nav className="nav-links">
+          <a className="nav-link" href="#collections">Collections</a>
+          <a className="nav-link" href="#bespoke">Bespoke</a>
+          <a className="nav-link" href="#atelier">Atelier</a>
+          <a className="nav-link" href="#clients">Clients</a>
+          <a className="nav-link" href="#contact">Contact</a>
+        </nav>
+        <div className="logo" onClick={() => window.scrollTo({top:0, behavior:'smooth'})}>
+          <div className="logo-mark">B</div>
+          <div className="logo-word">BOLD PIECES</div>
+        </div>
+        <div className="nav-actions">
+          <button className="icon-btn" aria-label="Search"><Icon.Search /></button>
+          <button className="icon-btn" aria-label="Account"><Icon.User /></button>
+          <button className="icon-btn cart-btn" aria-label="Cart" onClick={onOpenCart}>
+            <Icon.Bag />
+            {cartCount > 0 && <span className="cart-pill">{cartCount}</span>}
+          </button>
+        </div>
+      </div>
+    </header>
+  );
+}
+
+/* ───────────────── HERO ───────────────── */
+function Hero({ variant, onPrimaryCta }){
+  if (variant === 'centered') return <HeroCentered onPrimaryCta={onPrimaryCta}/>;
+  if (variant === 'overlay')  return <HeroOverlay onPrimaryCta={onPrimaryCta}/>;
+  return <HeroSplit onPrimaryCta={onPrimaryCta}/>;
+}
+
+function HeroSplit({ onPrimaryCta }){
+  return (
+    <section className="hero">
+      <div className="wrap hero-grid">
+        <div className="hero-stage">
+          <div className="stage-photo">
+            <Diamond3D/>
+            <Sparkles count={14}/>
+            <div className="gem-glow"/>
+            <div style={{position:'absolute',left:58,top:56,zIndex:3}}>
+              <div className="eyebrow" style={{color:'var(--gold-2)'}}>Maison Bold Pieces</div>
+              <h1 className="serif">Discover Your <em>Sparkle</em></h1>
+              <p className="lede">Welcoming the spring season with an enchanting blend of emerald, diamond, and bold maroon details.</p>
+              <div className="hero-ctas">
+                <button className="btn solid" onClick={onPrimaryCta}>Buy now</button>
+                <button className="btn">Explore</button>
+              </div>
+            </div>
+            <div className="placeholder">◇ 18k gold · brilliant cut · hand finished ◇</div>
+          </div>
+          <div className="stage-badge">
+            <div className="inner">
+              <span>The New</span>
+              <span className="big">Heirlooms</span>
+              <span>Collection · 26</span>
+            </div>
+          </div>
+          <div className="stage-cap">
+            <div className="t">Solène Solitaire</div>
+            <div className="s">18K · 0.7CT · NEW</div>
+            <div className="price">$2,480</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function HeroCentered({ onPrimaryCta }){
+  return (
+    <section className="hero" style={{padding:'70px 0 100px', textAlign:'center'}}>
+      <div className="wrap">
+        <div style={{display:'flex',gap:14,alignItems:'center',justifyContent:'center',marginBottom:34}}>
+          <span style={{width:42,height:1,background:'var(--gold)'}}/>
+          <span className="eyebrow">Spring · 26 New Heirlooms</span>
+          <span style={{width:42,height:1,background:'var(--gold)'}}/>
+        </div>
+        <h1 className="serif" style={{margin:'0 auto',maxWidth:1100}}>
+          Jewelry that signals<br/><em>quiet power</em>.
+        </h1>
+        <p className="lede" style={{margin:'30px auto 36px',textAlign:'center'}}>
+          Commission-grade fine jewelry, hand-forged in Antwerp for founders, partners, and families who buy once and keep forever.
+        </p>
+        <div className="hero-ctas" style={{justifyContent:'center'}}>
+          <button className="btn solid" onClick={onPrimaryCta}>Book private consultation <span className="arr"><Icon.ArrowRight/></span></button>
+          <button className="btn">Request custom proposal</button>
+        </div>
+        <div style={{marginTop:60, position:'relative', maxWidth:880, marginInline:'auto', aspectRatio:'16/8'}}>
+          <div className="stage-photo" style={{position:'absolute',inset:0}}>
+            <Diamond3D/>
+            <Sparkles count={12}/>
+            <div className="gem-glow"/>
+            <div className="placeholder">◇ 18k gold · brilliant cut · hand finished ◇</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function HeroOverlay({ onPrimaryCta }){
+  return (
+    <section className="hero" style={{padding:0, minHeight:'calc(100vh - 118px)', display:'grid'}}>
+      <div className="stage-photo" style={{position:'relative',gridColumn:1,gridRow:1,minHeight:600}}>
+        <Diamond3D/>
+        <Sparkles count={18}/>
+        <div className="gem-glow"/>
+        <div style={{position:'absolute',inset:0,background:'linear-gradient(180deg, transparent 30%, rgba(8,29,29,.7) 100%)'}}/>
+      </div>
+      <div className="wrap" style={{gridColumn:1,gridRow:1,alignSelf:'end',paddingBottom:90,position:'relative',zIndex:2}}>
+        <div className="hero-eyebrow"><span className="bar"/><span className="eyebrow">Bold Pieces · Est. 2018</span></div>
+        <h1 className="serif" style={{maxWidth:900}}>Jewelry that signals<br/><em>quiet power</em>.</h1>
+        <div className="hero-ctas" style={{marginTop:30}}>
+          <button className="btn solid" onClick={onPrimaryCta}>Book private consultation <span className="arr"><Icon.ArrowRight/></span></button>
+          <button className="btn">Request custom proposal</button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function TrustStrip(){
+  const items = [
+    { k: 'Private commissions / month', v: '08 max' },
+    { k: 'Average project value', v: '$9.6K' },
+    { k: 'Repeat client rate', v: '71%' },
+    { k: 'Craftsmanship guarantee', v: 'Lifetime' },
+  ];
+  return (
+    <section className="section" style={{padding:'42px 0 26px'}}>
+      <div className="wrap">
+        <div className="quotes" style={{gridTemplateColumns:'repeat(4,1fr)', gap:14}}>
+          {items.map((it) => (
+            <div key={it.k} className="q" style={{padding:'24px 22px'}}>
+              <div className="eyebrow">{it.k}</div>
+              <div className="serif" style={{fontSize:34,color:'var(--gold-2)',marginTop:8}}>{it.v}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ───────────────── CATEGORIES ───────────────── */
+function Categories({ onPick }){
+  const cats = [
+    { name:'Rings',     count:'Check More Product', Art: RingIcon, filterKey:'Rings' },
+    { name:'Couple Rings', count:'Check More Product', Art: NecklaceIcon, filterKey:'Rings' },
+    { name:'Earrings',  count:'Check More Product', Art: EarringIcon, filterKey:'Earrings' },
+  ];
+  return (
+    <section className="section" id="collections" style={{paddingTop:0}}>
+      <div className="wrap">
+        <div className="cat-grid stagger">
+          {cats.map((c, i) => (
+            <div key={c.name} className="cat" onClick={() => onPick && onPick(c.filterKey)}>
+              <div className="num">Categories</div>
+              <div className="ico"><c.Art size="100%"/></div>
+              <div className="label">
+                <div className="t">{c.name}</div>
+                <div className="c"><span>{c.count}</span><span className="arrow">↗</span></div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ───────────────── PRODUCTS ───────────────── */
+function Products({ filter, onFilter, onAdd, onQuickView }){
+  const cats = ['All', 'Rings', 'Necklaces', 'Earrings', 'Bracelets', 'Pendants'];
+  const visible = useMemo(() => {
+    return filter === 'All' ? PRODUCTS : PRODUCTS.filter(p => p.category === filter);
+  }, [filter]);
+
+  return (
+    <section className="section" style={{paddingTop:60}} id="shop">
+      <div className="wrap">
+        <div className="section-head" style={{alignItems:'center'}}>
+          <div style={{maxWidth:430}}>
+            <h2 className="serif">Diamonds &<br/>Engagement Ring</h2>
+            <div className="sub">Experience the beauty of diamond jewellery and find your perfect piece for special occasions and milestone gifting.</div>
+            <button className="btn solid" style={{marginTop:22}}>More Product</button>
+          </div>
+          <div style={{display:'flex',gap:10}}>
+            <button className="icon-btn">←</button>
+            <button className="icon-btn">→</button>
+          </div>
+        </div>
+        <div className="filter-row">
+          {cats.map(c => (
+            <button key={c} className={'chip ' + (filter===c?'on':'')} onClick={() => onFilter(c)}>{c}</button>
+          ))}
+        </div>
+        <div className="prod-grid stagger">
+          {visible.slice(0,4).map(p => {
+            const Art = p.Art;
+            return (
+              <div key={p.id} className="prod" onClick={() => onQuickView(p)}>
+                <div className="img">
+                  {p.badge && <div className="tag">{p.badge}</div>}
+                  <div className="center"><Art/></div>
+                  <button className="add" onClick={(e)=>{e.stopPropagation();onAdd(p);}}>Add To Cart</button>
+                </div>
+                <div className="meta">
+                  <div className="name serif">{p.name}</div>
+                  <div className="price serif">${p.price.toLocaleString()}</div>
+                </div>
+                <div className="sub">{p.sub}</div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ───────────────── ATELIER ───────────────── */
+function Atelier(){
+  return (
+    <section className="section" id="atelier" style={{paddingTop:40}}>
+      <div className="wrap atelier">
+        <div className="atelier-vis">
+          <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" strokeWidth="1.2">
+            <circle cx="100" cy="100" r="64" opacity=".4"/>
+            <circle cx="100" cy="100" r="46"/>
+            <path d="M68 100h64M100 68v64" opacity=".4"/>
+            <circle cx="100" cy="100" r="6" fill="currentColor" fillOpacity=".4"/>
+            <path d="M70 70l60 60M130 70l-60 60" opacity=".3"/>
+          </svg>
+          <div className="placeholder">◇ Atelier portrait · jeweler at bench ◇</div>
+        </div>
+        <div>
+          <div className="eyebrow">Section 03 · The atelier</div>
+          <h2 className="serif">Built by six artisans.<br/><em>Audited</em> at every stage.</h2>
+          <p>
+            Every commission starts from a wax sketch in Antwerp and moves through internal forging, stone setting, finish inspection, and numbered registration. No outsourcing, no anonymous factories, no quality ambiguity.
+          </p>
+          <div className="stats">
+            <div><div className="v">07</div><div className="l">Years operating</div></div>
+            <div><div className="v">06</div><div className="l">Jewelers in-house</div></div>
+            <div><div className="v">GIA</div><div className="l">Certified stones</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ───────────────── BESPOKE ───────────────── */
+function Bespoke(){
+  const steps = [
+    { n:'01', t:'Private brief', d:'45-minute strategy call · in studio or virtual' },
+    { n:'02', t:'Design direction', d:'Two concept routes · approved before casting' },
+    { n:'03', t:'Forge & certify', d:'4–6 weeks · hallmark, registration, lifetime care' },
+  ];
+  return (
+    <section className="bespoke" id="bespoke">
+      <div className="wrap bespoke-grid">
+        <div>
+          <div className="eyebrow">Section 04 · Bespoke</div>
+          <h2 className="serif">Commission what<br/><em>no one else</em> can copy.</h2>
+          <p>From private engagement rings to founder-gift collections, we accept a limited number of commissions monthly to preserve atelier attention and finishing quality.</p>
+          <button className="btn solid" onClick={() => document.getElementById('contact')?.scrollIntoView({behavior:'smooth', block:'start'})}>Start private commission <span className="arr"><Icon.ArrowRight/></span></button>
+        </div>
+        <div className="steps">
+          {steps.map(s => (
+            <div className="step" key={s.n}>
+              <div className="n serif">{s.n}</div>
+              <div>
+                <div className="t">{s.t}</div>
+                <div className="d">{s.d}</div>
+              </div>
+              <div className="ar">→</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ConversionBand(){
+  return (
+    <section className="bespoke" style={{padding:'90px 0'}}>
+      <div className="wrap" style={{textAlign:'center'}}>
+        <div className="eyebrow">Priority Intake · Q3</div>
+        <h2 className="serif" style={{margin:'16px auto 20px',maxWidth:900}}>Ready to design your <em>signature piece</em>?</h2>
+        <p style={{maxWidth:740,margin:'0 auto 30px'}}>Book a private consultation and receive a tailored concept brief with pricing range, timelines, and material options within 48 hours.</p>
+        <div className="hero-ctas" style={{justifyContent:'center'}}>
+          <button className="btn solid" onClick={() => document.getElementById('contact')?.scrollIntoView({behavior:'smooth', block:'start'})}>Book private consultation <span className="arr"><Icon.ArrowRight/></span></button>
+          <button className="btn" onClick={() => document.getElementById('shop')?.scrollIntoView({behavior:'smooth', block:'start'})}>View signature collection</button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ───────────────── TESTIMONIALS ───────────────── */
+function Testimonials(){
+  const items = [
+    { body:'The Solène arrived in a velvet box that felt heavier than the ring. Eight months on, the gold still has its mirror finish — and so does the moment.', n:'Amelia R.', r:'Engagement · Solène Solitaire', a:'A' },
+    { body:'I sent a sketch on hotel stationery. Six weeks later I held it. Bold Pieces is the only studio that took the brief seriously.', n:'Tomás L.', r:'Bespoke · Pendant', a:'T' },
+    { body:'I bought the Aria for my mother and quietly kept the second one for myself. No regrets — except not buying a third.', n:'Naomi K.', r:'Repeat client · Necklaces', a:'N' },
+  ];
+  return (
+    <section className="section" id="clients">
+      <div className="wrap">
+        <div className="section-head">
+          <div>
+            <div className="eyebrow" style={{marginBottom:14}}>Section 05 · Private clients</div>
+            <h2 className="serif">Trusted by clients with <em>high standards</em>.</h2>
+          </div>
+          <div className="sub">Verified post-purchase reflections from bespoke and collection clients.</div>
+        </div>
+        <div className="quotes stagger">
+          {items.map((q,i)=>(
+            <div key={i} className="q">
+              <div className="mark">"</div>
+              <div className="stars">{Array.from({length:5}).map((_,j)=><Icon.Star key={j}/>)}</div>
+              <div className="body">{q.body}</div>
+              <div className="by">
+                <div className="av">{q.a}</div>
+                <div>
+                  <div className="n serif">{q.n}</div>
+                  <div className="r">{q.r}</div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ───────────────── NEWSLETTER ───────────────── */
+function Newsletter(){
+  const [email, setEmail] = useState('');
+  const [ok, setOk] = useState(false);
+  const submit = (e)=>{
+    e.preventDefault();
+    if(!/.+@.+\..+/.test(email)) return;
+    setOk(true); setEmail('');
+    setTimeout(()=>setOk(false), 4000);
+  };
+  return (
+    <section className="news" id="contact">
+      <div className="wrap">
+        <div className="eyebrow" style={{marginBottom:14}}>Section 06 · Letters</div>
+        <h2 className="serif">Book your<br/><em>private consult</em>.</h2>
+        <p>Share your email and we will send available consultation slots, indicative budgets, and next-step options within one business day.</p>
+        <form onSubmit={submit}>
+          <input type="email" placeholder="you@company.com" value={email} onChange={e=>setEmail(e.target.value)}/>
+          <button type="submit">Request Slots</button>
+        </form>
+        <div className="ok">{ok ? '◆ Consultation options sent ◆' : ''}</div>
+      </div>
+    </section>
+  );
+}
+
+/* ───────────────── FOOTER ───────────────── */
+function Footer(){
+  return (
+    <footer>
+      <div className="wrap">
+        <div className="foot-top">
+          <div className="col1">
+            <div style={{display:'flex',alignItems:'center',gap:12,marginBottom:18}}>
+              <div className="logo-mark">B</div>
+              <div className="logo-word">BOLD PIECES</div>
+            </div>
+            <p>Heirloom-grade fine jewelry, hand-forged in Antwerp. Each piece is numbered, registered, and guaranteed for life.</p>
+            <div className="socials">
+              <a href="#" aria-label="Instagram"><Icon.Instagram/></a>
+              <a href="#" aria-label="Pinterest"><Icon.Pinterest/></a>
+              <a href="#" aria-label="TikTok"><Icon.TikTok/></a>
+            </div>
+          </div>
+          <div>
+            <h4>Shop</h4>
+            <ul>
+              <li>Rings</li><li>Necklaces</li><li>Earrings</li><li>Bracelets</li><li>Pendants</li><li>Bespoke</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Maison</h4>
+            <ul>
+              <li>Our atelier</li><li>Materials</li><li>Sustainability</li><li>Journal</li><li>Press</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Care</h4>
+            <ul>
+              <li>Lifetime guarantee</li><li>Resize & repair</li><li>Engraving</li><li>Shipping & returns</li><li>Contact</li>
+            </ul>
+          </div>
+        </div>
+        <div className="foot-mark">BOLD&nbsp;PIECES</div>
+        <div className="foot-bot">
+          <div>© 2026 Bold Pieces · Antwerp · Atelier no. 17</div>
+          <div>Privacy · Terms · Cookies</div>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+/* ───────────────── CART DRAWER ───────────────── */
+function CartDrawer({ open, items, onClose, onQty, onRm, total }){
+  return (
+    <React.Fragment>
+      <div className={'scrim ' + (open?'on':'')} onClick={onClose}/>
+      <aside className={'cart ' + (open?'on':'')}>
+        <div className="cart-hd">
+          <div className="t serif">Your bag · {items.length}</div>
+          <button className="x" onClick={onClose}>×</button>
+        </div>
+        <div className="cart-body">
+          {items.length === 0 && (
+            <div className="cart-empty">
+              <div className="ico"><Icon.Bag/></div>
+              <div>Nothing here yet.<br/>Begin with the new heirlooms.</div>
+            </div>
+          )}
+          {items.map(it => {
+            const Art = it.Art;
+            return (
+              <div className="cart-item" key={it.id}>
+                <div className="thumb"><Art size={56}/></div>
+                <div className="info">
+                  <div className="n">{it.name}</div>
+                  <div className="p">${it.price.toLocaleString()}</div>
+                  <div className="qty">
+                    <button onClick={()=>onQty(it.id,-1)}>−</button>
+                    <span className="v">{it.qty}</span>
+                    <button onClick={()=>onQty(it.id,1)}>+</button>
+                  </div>
+                </div>
+                <button className="rm" onClick={()=>onRm(it.id)}>Remove</button>
+              </div>
+            );
+          })}
+        </div>
+        {items.length > 0 && (
+          <div className="cart-ft">
+            <div className="row"><span className="l">Subtotal</span><span className="v">${total.toLocaleString()}</span></div>
+            <button className="btn solid">Checkout <span className="arr"><Icon.ArrowRight/></span></button>
+          </div>
+        )}
+      </aside>
+    </React.Fragment>
+  );
+}
+
+/* ───────────────── QUICK VIEW ───────────────── */
+function QuickView({ product, onClose, onAdd }){
+  const [size, setSize] = useState('M');
+  if (!product) return null;
+  const Art = product.Art;
+  const sizes = product.category === 'Rings' ? ['5','6','7','8','9'] :
+                product.category === 'Bracelets' ? ['S','M','L'] :
+                product.category === 'Necklaces' ? ['16in','18in','20in'] :
+                ['One size'];
+  return (
+    <div className="qv-scrim on" onClick={onClose}>
+      <div className="qv" onClick={e=>e.stopPropagation()}>
+        <div className="vis">
+          <Art/>
+          {product.badge && <div className="tag" style={{position:'absolute',top:14,left:14,fontFamily:'var(--mono)',fontSize:9.5,letterSpacing:'.2em',color:'var(--gold)',background:'rgba(8,29,29,.7)',padding:'5px 9px',border:'1px solid var(--line)'}}>{product.badge}</div>}
+        </div>
+        <div className="body">
+          <button className="x" onClick={onClose}>×</button>
+          <div className="eyebrow">{product.category} · {product.sub}</div>
+          <h3 className="serif">{product.name}</h3>
+          <div className="price serif">${product.price.toLocaleString()}</div>
+          <p className="desc">A quietly bold piece, hand-finished in our Antwerp atelier. Each one is numbered and arrives with a lifetime care card and complimentary engraving.</p>
+          <div className="specs">
+            <div>Metal<b>18k yellow gold</b></div>
+            <div>Stone<b>VS · F-color</b></div>
+            <div>Origin<b>Antwerp atelier</b></div>
+            <div>Guarantee<b>Lifetime</b></div>
+          </div>
+          <div className="eyebrow" style={{marginTop:6}}>{product.category==='Rings' ? 'Ring size' : product.category==='Bracelets' ? 'Wrist' : product.category==='Necklaces' ? 'Length' : 'Size'}</div>
+          <div className="sizes">
+            {sizes.map(s => (
+              <button key={s} className={'sz '+(size===s?'on':'')} onClick={()=>setSize(s)}>{s}</button>
+            ))}
+          </div>
+          <div className="actions">
+            <button className="btn solid" onClick={()=>{onAdd({...product, size}); onClose();}}>Add to bag</button>
+            <button className="btn"><Icon.Heart/></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+Object.assign(window, {
+  Announce, Nav, Hero, Categories, Products, Atelier, Bespoke,
+  Testimonials, Newsletter, Footer, CartDrawer, QuickView, PRODUCTS, TrustStrip, ConversionBand
+});
+
+
+// app.jsx — Bold Pieces main app
+// Wires together all sections + state (cart, filter, quick view, tweaks).
+
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "palette":  "emerald",
+  "hero":     "split",
+  "typeface": "cormorant",
+  "motion":   "full",
+  "showBadge": true
+}/*EDITMODE-END*/;
+
+const PALETTES = {
+  emerald: {
+    '--bg':'#0E2A2A', '--bg-2':'#0A1F1F', '--bg-3':'#143131',
+    '--gold':'#C8A66B', '--gold-2':'#E6CC8E',
+    '--cream':'#F4EDE1', '--cream-2':'#E6DCC8',
+    '--line':'rgba(200,166,107,.22)', '--line-2':'rgba(244,237,225,.10)'
+  },
+  obsidian: {
+    '--bg':'#0E0F12', '--bg-2':'#08090B', '--bg-3':'#141519',
+    '--gold':'#C8A66B', '--gold-2':'#E6CC8E',
+    '--cream':'#F4EDE1', '--cream-2':'#E6DCC8',
+    '--line':'rgba(200,166,107,.22)', '--line-2':'rgba(244,237,225,.10)'
+  },
+  oxblood: {
+    '--bg':'#2A1414', '--bg-2':'#1F0E0E', '--bg-3':'#341818',
+    '--gold':'#C8A66B', '--gold-2':'#E8CE8C',
+    '--cream':'#F4EDE1', '--cream-2':'#E6DCC8',
+    '--line':'rgba(200,166,107,.22)', '--line-2':'rgba(244,237,225,.10)'
+  },
+  midnight: {
+    '--bg':'#0B1C2C', '--bg-2':'#071423', '--bg-3':'#102640',
+    '--gold':'#C8A66B', '--gold-2':'#E6CC8E',
+    '--cream':'#F4EDE1', '--cream-2':'#E6DCC8',
+    '--line':'rgba(200,166,107,.22)', '--line-2':'rgba(244,237,225,.10)'
+  },
+};
+
+const TYPEFACES = {
+  cormorant: '"Cormorant Garamond", Georgia, serif',
+  playfair:  '"Playfair Display", Georgia, serif',
+  italiana:  '"Italiana", "Cormorant Garamond", serif',
+};
+
+function App(){
+  const goToContact = () => document.getElementById('contact')?.scrollIntoView({behavior:'smooth', block:'start'});
+
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+
+  // commerce state
+  const [filter, setFilter] = useState('All');
+  const [cart, setCart] = useState([]);
+  const [cartOpen, setCartOpen] = useState(false);
+  const [qv, setQv] = useState(null);
+  const [toast, setToast] = useState('');
+
+  // scroll progress
+  const railRef = useRef(null);
+  useEffect(() => {
+    const onScroll = () => {
+      const d = document.documentElement;
+      const max = (d.scrollHeight - d.clientHeight) || 1;
+      const pct = Math.max(0, Math.min(100, (d.scrollTop / max) * 100));
+      if (railRef.current) railRef.current.style.width = pct + '%';
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // theme variables from tweaks
+  useEffect(() => {
+    const p = PALETTES[t.palette] || PALETTES.emerald;
+    Object.entries(p).forEach(([k,v]) => document.documentElement.style.setProperty(k, v));
+    document.documentElement.style.setProperty('--serif', TYPEFACES[t.typeface] || TYPEFACES.cormorant);
+  }, [t.palette, t.typeface]);
+
+  // reveal on scroll (.reveal + .stagger)
+  useEffect(() => {
+    const els = document.querySelectorAll('.reveal, .stagger');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    els.forEach(el => io.observe(el));
+    return () => io.disconnect();
+  }, [t.palette, t.hero]);
+
+  // Cursor spotlight + magnetic buttons + scroll parallax
+  useEffect(() => {
+    if (t.motion === 'off') {
+      document.body.classList.add('motion-off');
+      return;
+    }
+    document.body.classList.remove('motion-off');
+
+    const spot = document.createElement('div');
+    spot.className = 'spotlight';
+    spot.style.opacity = '0';
+    document.body.appendChild(spot);
+
+    let mx = window.innerWidth/2, my = window.innerHeight/2;
+    let sx = mx, sy = my;
+
+    const onMove = (e) => { mx = e.clientX; my = e.clientY; spot.style.opacity = '1'; };
+    const onLeave = () => { spot.style.opacity = '0'; };
+    window.addEventListener('pointermove', onMove);
+    window.addEventListener('pointerleave', onLeave);
+
+    // Magnetic buttons
+    const btns = Array.from(document.querySelectorAll('.btn'));
+    const onBtnMove = (e) => {
+      if (t.motion !== 'full') return;
+      const btn = e.currentTarget;
+      const r = btn.getBoundingClientRect();
+      const x = (e.clientX - r.left - r.width/2) * 0.14;
+      const y = (e.clientY - r.top - r.height/2) * 0.14;
+      btn.style.transform = `translate(${x}px, ${y}px)`;
+    };
+    const onBtnLeave = (e) => { e.currentTarget.style.transform = ''; };
+    btns.forEach(b => { b.addEventListener('pointermove', onBtnMove); b.addEventListener('pointerleave', onBtnLeave); });
+
+    // Product card 3D tilt
+    const cards = Array.from(document.querySelectorAll('.prod'));
+    const onCardMove = (e) => {
+      if (t.motion === 'off') return;
+      const c = e.currentTarget;
+      const r = c.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width  - 0.5;
+      const py = (e.clientY - r.top)  / r.height - 0.5;
+      const intensity = t.motion === 'full' ? 1 : 0.45;
+      const rx = -py * 7 * intensity, ry = px * 8 * intensity;
+      c.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(0)`;
+    };
+    const onCardLeave = (e) => { e.currentTarget.style.transform = ''; };
+    cards.forEach(c => { c.addEventListener('pointermove', onCardMove); c.addEventListener('pointerleave', onCardLeave); });
+
+    // Scroll parallax on hero ornaments + foot mark
+    const parBadge = document.querySelector('.stage-badge');
+    const parCap   = document.querySelector('.stage-cap');
+    const parMark  = document.querySelector('.foot-mark');
+    const onScroll = () => {
+      if (t.motion === 'off') return;
+      const y = window.scrollY;
+      const p = t.motion === 'full' ? 1 : 0.45;
+      if (parBadge) parBadge.style.transform = `translateY(${y * -0.08 * p}px) rotate(${y * 0.035 * p}deg)`;
+      if (parCap)   parCap.style.transform   = `translateY(${y * 0.05 * p}px)`;
+      if (parMark)  parMark.style.transform  = `translateX(${Math.sin(y * 0.0015) * 18 * p}px)`;
+    };
+    window.addEventListener('scroll', onScroll, { passive:true });
+
+    // Spotlight raf
+    let raf;
+    const tick = () => {
+      sx += (mx - sx) * 0.18;
+      sy += (my - sy) * 0.18;
+      spot.style.transform = `translate(${sx}px, ${sy}px) translate(-50%, -50%)`;
+      raf = requestAnimationFrame(tick);
+    };
+    tick();
+
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener('pointermove', onMove);
+      window.removeEventListener('pointerleave', onLeave);
+      window.removeEventListener('scroll', onScroll);
+      btns.forEach(b => { b.removeEventListener('pointermove', onBtnMove); b.removeEventListener('pointerleave', onBtnLeave); });
+      cards.forEach(c => { c.removeEventListener('pointermove', onCardMove); c.removeEventListener('pointerleave', onCardLeave); });
+      if (spot.parentNode) spot.parentNode.removeChild(spot);
+    };
+  }, [t.motion, t.hero, t.palette]);
+
+  // commerce handlers
+  const addToCart = (p) => {
+    setCart(prev => {
+      const found = prev.find(i => i.id === p.id);
+      if (found) return prev.map(i => i.id === p.id ? {...i, qty: i.qty + 1} : i);
+      return [...prev, {...p, qty: 1}];
+    });
+    setToast('◆ Added to bag — ' + p.name);
+    clearTimeout(window.__toastTO);
+    window.__toastTO = setTimeout(() => setToast(''), 2400);
+  };
+  const setQty = (id, d) => setCart(prev =>
+    prev.map(i => i.id === id ? {...i, qty: Math.max(1, i.qty + d)} : i)
+  );
+  const removeItem = (id) => setCart(prev => prev.filter(i => i.id !== id));
+  const total = cart.reduce((s,i) => s + i.price * i.qty, 0);
+  const count = cart.reduce((s,i) => s + i.qty, 0);
+
+  const pickCategory = (name) => {
+    setFilter(name);
+    document.getElementById('shop')?.scrollIntoView({behavior:'smooth', block:'start'});
+  };
+
+  return (
+    <>
+      <div className="scroll-rail"><i ref={railRef}/></div>
+      <Announce/>
+      <Nav cartCount={count} onOpenCart={()=>setCartOpen(true)}/>
+      <Hero variant={t.hero} onPrimaryCta={goToContact}/>
+      <TrustStrip/>
+      <Categories onPick={pickCategory}/>
+      <Products
+        filter={filter}
+        onFilter={setFilter}
+        onAdd={addToCart}
+        onQuickView={setQv}
+      />
+      <Atelier/>
+      <Bespoke/>
+      <ConversionBand/>
+      <Testimonials/>
+      <Newsletter/>
+      <Footer/>
+
+      <CartDrawer
+        open={cartOpen}
+        items={cart}
+        onClose={()=>setCartOpen(false)}
+        onQty={setQty}
+        onRm={removeItem}
+        total={total}
+      />
+      <QuickView product={qv} onClose={()=>setQv(null)} onAdd={addToCart}/>
+
+      <div className={'toast ' + (toast ? 'on' : '')}>{toast}</div>
+
+      <TweaksPanel>
+        <TweakSection label="Palette"/>
+        <TweakRadio
+          label="Theme"
+          value={t.palette}
+          options={['emerald','obsidian','oxblood','midnight']}
+          onChange={v=>setTweak('palette', v)}
+        />
+        <TweakSection label="Hero"/>
+        <TweakRadio
+          label="Variant"
+          value={t.hero}
+          options={['split','centered','overlay']}
+          onChange={v=>setTweak('hero', v)}
+        />
+        <TweakSection label="Motion"/>
+        <TweakRadio
+          label="Intensity"
+          value={t.motion}
+          options={['full','subtle','off']}
+          onChange={v=>setTweak('motion', v)}
+        />
+        <TweakSection label="Typography"/>
+        <TweakRadio
+          label="Display serif"
+          value={t.typeface}
+          options={['cormorant','playfair','italiana']}
+          onChange={v=>setTweak('typeface', v)}
+        />
+      </TweaksPanel>
+    </>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById('app'));
+root.render(<App/>);
+
+  </script>
+</body>
+</html>
