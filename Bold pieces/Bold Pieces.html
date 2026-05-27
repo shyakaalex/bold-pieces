@@ -11,17 +11,17 @@
 <style>
   :root{
     /* Palette (emerald default; overwritten by Tweaks) */
-    --bg:        #f2f0ec;
-    --bg-2:      #ffffff;
-    --bg-3:      #ece7dd;
-    --ink:       #143131;
+    --bg:        #0E2A2A;
+    --bg-2:      #0A1F1F;
+    --bg-3:      #143131;
+    --ink:       #0E2A2A;
     --gold:      #C8A66B;
     --gold-2:    #E6CC8E;
-    --cream:     #ffffff;
-    --cream-2:   #f9f8f6;
-    --muted:     rgba(20,49,49,.62);
-    --line:      rgba(20,49,49,.16);
-    --line-2:    rgba(20,49,49,.08);
+    --cream:     #F4EDE1;
+    --cream-2:   #E6DCC8;
+    --muted:     rgba(244,237,225,.48);
+    --line:      rgba(200,166,107,.22);
+    --line-2:    rgba(244,237,225,.10);
     --maroon:    #5a2431;
 
     --serif: "Cormorant Garamond", "Playfair Display", Georgia, serif;
@@ -33,7 +33,7 @@
   html,body{margin:0;padding:0}
   body{
     background:var(--bg);
-    color:var(--ink);
+    color:var(--cream-2);
     font-family:var(--sans);
     -webkit-font-smoothing:antialiased;
     text-rendering:optimizeLegibility;
@@ -84,7 +84,7 @@
   /* Nav */
   .nav{
     position:sticky;top:0;z-index:50;
-    background:rgba(242,240,236,.72);
+    background:rgba(10,25,25,.88);
     -webkit-backdrop-filter:blur(14px) saturate(140%);backdrop-filter:blur(14px) saturate(140%);
     border-bottom:1px solid var(--line-2);
   }
@@ -95,7 +95,7 @@
   .nav-links{display:flex;gap:34px;align-items:center;justify-self:start}
   .nav-link{
     font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;
-    color:var(--ink);opacity:.7;cursor:pointer;
+    color:var(--cream-2);opacity:.72;cursor:pointer;
     position:relative;padding-bottom:4px;
   }
   .nav-link:hover{opacity:1;color:var(--cream)}
@@ -111,11 +111,11 @@
   .logo-mark::after{
     content:"";position:absolute;inset:-5px;border:1px solid var(--line);border-radius:50%;
   }
-  .logo-word{font-family:var(--serif);font-size:22px;letter-spacing:.36em;color:var(--ink);font-weight:500}
+  .logo-word{font-family:var(--serif);font-size:22px;letter-spacing:.36em;color:var(--cream);font-weight:500}
   .nav-actions{display:flex;gap:18px;align-items:center;justify-self:end}
   .icon-btn{
     width:38px;height:38px;display:grid;place-items:center;border:1px solid transparent;
-    border-radius:999px;color:var(--ink);cursor:pointer;background:rgba(255,255,255,.8);
+    border-radius:999px;color:var(--cream-2);cursor:pointer;background:rgba(255,255,255,.06);
     transition:border-color .25s ease,color .25s ease;
   }
   .icon-btn:hover{border-color:var(--line);color:var(--cream)}
@@ -184,7 +184,7 @@
     display:grid;place-items:center;text-align:center;
     background:rgba(10,20,20,.6);backdrop-filter:blur(10px);
     font-family:var(--serif);font-size:13px;letter-spacing:.2em;text-transform:uppercase;
-    animation: spin 30s linear infinite;
+    animation: spin 70s linear infinite;
   }
   .stage-badge .inner{transform:none}
   .stage-badge span{display:block;line-height:1.5}
@@ -192,12 +192,12 @@
   @keyframes spin{to{transform:rotate(360deg)}}
 
   .stage-cap{
-    position:absolute;left:24px;bottom:24px;background:rgba(255,255,255,.88);
-    border:1px solid var(--line);padding:14px 18px;border-radius:2px;max-width:240px;
-    box-shadow:0 18px 40px rgba(0,0,0,.4);
+    position:absolute;left:24px;bottom:24px;background:rgba(6,16,16,.92);
+    border:1px solid var(--line);padding:14px 18px;border-radius:0;max-width:240px;
+    box-shadow:0 18px 40px rgba(0,0,0,.6);
   }
-  .stage-cap .t{font-family:var(--serif);font-size:18px;color:var(--ink)}
-  .stage-cap .s{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;color:var(--maroon);margin-top:6px}
+  .stage-cap .t{font-family:var(--serif);font-size:18px;color:var(--cream)}
+  .stage-cap .s{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;color:var(--gold);margin-top:6px;opacity:.9}
   .stage-cap .price{margin-top:10px;font-family:var(--serif);color:var(--gold-2);font-size:16px}
 
   /* CATEGORIES */
@@ -205,7 +205,7 @@
   .section-head{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:60px;flex-wrap:wrap}
   .section-head h2{
     font-family:var(--serif);font-weight:400;
-    font-size:clamp(36px,4.6vw,64px);line-height:1;margin:0;color:var(--ink);letter-spacing:-.005em;
+    font-size:clamp(36px,4.6vw,64px);line-height:1;margin:0;color:var(--cream);letter-spacing:-.005em;
   }
   .section-head h2 em{font-style:italic;color:var(--gold);font-weight:300}
   .section-head .sub{font-family:var(--serif);font-size:18px;color:var(--cream-2);max-width:380px;line-height:1.5;font-weight:300}
@@ -214,16 +214,16 @@
   @media (max-width:980px){.cat-grid{grid-template-columns:1fr;margin-top:20px}}
   .cat{
     position:relative;aspect-ratio: 4 / 3;border:1px solid var(--line);
-    background:#ffffff;
+    background:var(--bg-3);
     cursor:pointer;overflow:hidden;transition:transform .4s ease, border-color .4s ease;
-    border-radius:16px;
-    box-shadow:0 16px 30px -22px rgba(0,0,0,.28);
+    border-radius:2px;
+    box-shadow:0 16px 30px -22px rgba(0,0,0,.5);
   }
   .cat:hover{border-color:var(--gold);transform:translateY(-4px)}
   .cat .num{position:absolute;top:14px;left:14px;font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--gold);opacity:.75}
   .cat .ico{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);width:46%;color:var(--gold-2);opacity:.95}
   .cat .label{position:absolute;left:18px;right:18px;bottom:18px}
-  .cat .label .t{font-family:var(--serif);font-size:30px;color:var(--ink)}
+  .cat .label .t{font-family:var(--serif);font-size:30px;color:var(--cream)}
   .cat .label .c{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;color:var(--muted);margin-top:6px;display:flex;justify-content:space-between;align-items:center}
   .cat .label .c .arrow{color:var(--gold)}
 
@@ -242,9 +242,9 @@
   .prod{position:relative;cursor:pointer}
   .prod .img{
     position:relative;aspect-ratio:4/5;overflow:hidden;
-    background:linear-gradient(160deg, #fff, #f4f1eb);
+    background:linear-gradient(160deg, #1a3232, #0c2020);
     border:1px solid var(--line);
-    border-radius:14px;
+    border-radius:0;
   }
   .prod:hover .img{border-color:var(--gold)}
   .prod .img .center{
@@ -264,8 +264,8 @@
   .prod:hover .add{transform:translate(-50%,0);opacity:1}
   .prod .add:hover{background:var(--gold);color:var(--ink)}
   .prod .meta{padding:14px 2px 0;display:flex;justify-content:space-between;gap:14px;align-items:baseline}
-  .prod .meta .name{font-family:var(--serif);font-size:19px;color:var(--ink);font-weight:500}
-  .prod .meta .price{font-family:var(--serif);font-size:17px;color:var(--maroon)}
+  .prod .meta .name{font-family:var(--serif);font-size:19px;color:var(--cream);font-weight:400}
+  .prod .meta .price{font-family:var(--serif);font-size:17px;color:var(--gold)}
   .prod .sub{font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;color:var(--muted);margin-top:4px}
 
   /* ATELIER */
@@ -1008,14 +1008,13 @@ function HeroSplit({ onPrimaryCta }){
             <div className="gem-glow"/>
             <div style={{position:'absolute',left:58,top:56,zIndex:3}}>
               <div className="eyebrow" style={{color:'var(--gold-2)'}}>Maison Bold Pieces</div>
-              <h1 className="serif">Discover Your <em>Sparkle</em></h1>
-              <p className="lede">Welcoming the spring season with an enchanting blend of emerald, diamond, and bold maroon details.</p>
+              <h1 className="serif">Quietly worn,<br/><em>boldly made</em>.</h1>
+              <p className="lede">Fine jewelry hand-forged in Antwerp for those who buy once and keep forever.</p>
               <div className="hero-ctas">
-                <button className="btn solid" onClick={onPrimaryCta}>Buy now</button>
-                <button className="btn">Explore</button>
+                <button className="btn solid" onClick={onPrimaryCta}>Explore the collection <span className="arr"><Icon.ArrowRight/></span></button>
+                <button className="btn">Book consultation</button>
               </div>
             </div>
-            <div className="placeholder">◇ 18k gold · brilliant cut · hand finished ◇</div>
           </div>
           <div className="stage-badge">
             <div className="inner">
@@ -1059,7 +1058,6 @@ function HeroCentered({ onPrimaryCta }){
             <Diamond3D/>
             <Sparkles count={12}/>
             <div className="gem-glow"/>
-            <div className="placeholder">◇ 18k gold · brilliant cut · hand finished ◇</div>
           </div>
         </div>
       </div>
@@ -1114,9 +1112,9 @@ function TrustStrip(){
 /* ───────────────── CATEGORIES ───────────────── */
 function Categories({ onPick }){
   const cats = [
-    { name:'Rings',     count:'Check More Product', Art: RingIcon, filterKey:'Rings' },
-    { name:'Couple Rings', count:'Check More Product', Art: NecklaceIcon, filterKey:'Rings' },
-    { name:'Earrings',  count:'Check More Product', Art: EarringIcon, filterKey:'Earrings' },
+    { name:'Rings',       count:'Explore', num:'01', Art: RingIcon,     filterKey:'Rings' },
+    { name:'Couple Rings',count:'Explore', num:'02', Art: NecklaceIcon, filterKey:'Rings' },
+    { name:'Earrings',    count:'Explore', num:'03', Art: EarringIcon,  filterKey:'Earrings' },
   ];
   return (
     <section className="section" id="collections" style={{paddingTop:0}}>
@@ -1124,7 +1122,7 @@ function Categories({ onPick }){
         <div className="cat-grid stagger">
           {cats.map((c, i) => (
             <div key={c.name} className="cat" onClick={() => onPick && onPick(c.filterKey)}>
-              <div className="num">Categories</div>
+              <div className="num">{c.num}</div>
               <div className="ico"><c.Art size="100%"/></div>
               <div className="label">
                 <div className="t">{c.name}</div>
@@ -1150,9 +1148,9 @@ function Products({ filter, onFilter, onAdd, onQuickView }){
       <div className="wrap">
         <div className="section-head" style={{alignItems:'center'}}>
           <div style={{maxWidth:430}}>
-            <h2 className="serif">Diamonds &<br/>Engagement Ring</h2>
-            <div className="sub">Experience the beauty of diamond jewellery and find your perfect piece for special occasions and milestone gifting.</div>
-            <button className="btn solid" style={{marginTop:22}}>More Product</button>
+            <h2 className="serif">The<br/>Collection</h2>
+            <div className="sub">Handcrafted in our Antwerp atelier — each piece numbered, certified, and made to outlast the moment.</div>
+            <button className="btn solid" style={{marginTop:22}}>View all pieces</button>
           </div>
           <div style={{display:'flex',gap:10}}>
             <button className="icon-btn">←</button>
@@ -1201,10 +1199,9 @@ function Atelier(){
             <circle cx="100" cy="100" r="6" fill="currentColor" fillOpacity=".4"/>
             <path d="M70 70l60 60M130 70l-60 60" opacity=".3"/>
           </svg>
-          <div className="placeholder">◇ Atelier portrait · jeweler at bench ◇</div>
         </div>
         <div>
-          <div className="eyebrow">Section 03 · The atelier</div>
+          <div className="eyebrow">The Atelier</div>
           <h2 className="serif">Built by six artisans.<br/><em>Audited</em> at every stage.</h2>
           <p>
             Every commission starts from a wax sketch in Antwerp and moves through internal forging, stone setting, finish inspection, and numbered registration. No outsourcing, no anonymous factories, no quality ambiguity.
@@ -1231,7 +1228,7 @@ function Bespoke(){
     <section className="bespoke" id="bespoke">
       <div className="wrap bespoke-grid">
         <div>
-          <div className="eyebrow">Section 04 · Bespoke</div>
+          <div className="eyebrow">Bespoke</div>
           <h2 className="serif">Commission what<br/><em>no one else</em> can copy.</h2>
           <p>From private engagement rings to founder-gift collections, we accept a limited number of commissions monthly to preserve atelier attention and finishing quality.</p>
           <button className="btn solid" onClick={() => document.getElementById('contact')?.scrollIntoView({behavior:'smooth', block:'start'})}>Start private commission <span className="arr"><Icon.ArrowRight/></span></button>
@@ -1281,7 +1278,7 @@ function Testimonials(){
       <div className="wrap">
         <div className="section-head">
           <div>
-            <div className="eyebrow" style={{marginBottom:14}}>Section 05 · Private clients</div>
+            <div className="eyebrow" style={{marginBottom:14}}>Private Clients</div>
             <h2 className="serif">Trusted by clients with <em>high standards</em>.</h2>
           </div>
           <div className="sub">Verified post-purchase reflections from bespoke and collection clients.</div>
@@ -1320,7 +1317,7 @@ function Newsletter(){
   return (
     <section className="news" id="contact">
       <div className="wrap">
-        <div className="eyebrow" style={{marginBottom:14}}>Section 06 · Letters</div>
+        <div className="eyebrow" style={{marginBottom:14}}>Stay in Touch</div>
         <h2 className="serif">Book your<br/><em>private consult</em>.</h2>
         <p>Share your email and we will send available consultation slots, indicative budgets, and next-step options within one business day.</p>
         <form onSubmit={submit}>
