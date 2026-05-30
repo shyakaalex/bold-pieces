@@ -80,7 +80,7 @@ async function start() {
   await ensureCatalog();
 
   await new Promise((resolve, reject) => {
-    const server = app.listen(port, () => {
+    const server = app.listen(port, "0.0.0.0", () => {
       console.log(`API listening on http://localhost:${port}`);
       console.log(
         `Shwary: ${isShwaryConfigured() ? (isShwarySandbox() ? "sandbox mode" : "live mode") : "NOT CONFIGURED — set SHWARY_MERCHANT_KEY"}`
