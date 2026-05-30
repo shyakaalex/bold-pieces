@@ -46,7 +46,7 @@ a { color: inherit; }
 .modal-copy { margin: 0 0 14px; color: var(--text-muted); font-size: 13px; line-height: 1.45; }
 .thumb { height: 145px; background-size: cover; background-position: center; background-color: #d8b878; }
 .story { margin-top: 20px; min-height: 210px; display: grid; grid-template-columns: 38% 62%; background: var(--emerald); color: #f6efdf; }
-.story-image { background-image: linear-gradient(rgba(10,30,22,.2), rgba(10,30,22,.2)), url("/assets/story/model 1.png"); background-size: cover; background-position: center; }
+.story-image { background-image: linear-gradient(rgba(10,30,22,.2), rgba(10,30,22,.2)), url("/assets/hero/model%202.png"); background-size: cover; background-position: center; }
 .story-copy { padding: 26px 28px; }
 .story-copy small { font-size: 11px; letter-spacing: .12em; }
 .story-copy h2 { margin: 8px 0 10px; font-family: "Cormorant Garamond", serif; font-size: 44px; line-height: .95; font-weight: 500; }
