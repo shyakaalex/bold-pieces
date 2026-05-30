@@ -1,0 +1,142 @@
+/* Homepage — desktop layout rhythm & section alignment */
+
+.home-page {
+  width: 100%;
+}
+
+/* Tighter side gutters on homepage — hero fills available width */
+.site-main--home {
+  padding-left: max(10px, env(safe-area-inset-left));
+  padding-right: max(10px, env(safe-area-inset-right));
+}
+
+@media (min-width: 681px) {
+  .site-main--home {
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right: max(12px, env(safe-area-inset-right));
+  }
+}
+
+.home-page__container {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+.home-page__featured {
+  padding-bottom: 8px;
+}
+
+.home-page .section-head {
+  margin-top: 40px;
+  margin-bottom: 16px;
+  align-items: baseline;
+  gap: 16px;
+}
+
+.home-page .section-head h3 {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: var(--text-dark);
+}
+
+.home-page .section-head a {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  color: var(--text-muted);
+  transition: color var(--transition);
+}
+
+.home-page .section-head a:hover {
+  color: var(--emerald);
+}
+
+.home-page .filters {
+  margin-top: 0;
+  margin-bottom: 24px;
+  gap: 10px;
+}
+
+.home-page .chip {
+  padding: 10px 16px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  border-radius: var(--radius-sm);
+  transition: background-color var(--transition), color var(--transition), border-color var(--transition);
+}
+
+.home-page .story {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 48px;
+}
+
+.home-page .newsletter {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 48px;
+}
+
+@media (min-width: 681px) {
+  .home-page .products--featured {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  .home-page .featured-card__body {
+    padding: 14px 14px 16px;
+    gap: 6px;
+  }
+
+  .home-page .featured-card__name {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .home-page .featured-card__price {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-dark);
+  }
+
+  .home-page .featured-card__badge {
+    font-size: 9px;
+    padding: 5px 8px;
+    letter-spacing: 0.11em;
+  }
+
+  .home-page .featured-card__star {
+    font-size: 11px;
+  }
+
+  .home-page .featured-card__reviews {
+    font-size: 11px;
+  }
+
+  .home-page .featured-card__rating {
+    margin-top: 4px;
+  }
+}
+
+@media (max-width: 680px) {
+  .home-page .section-head {
+    margin-top: 28px;
+    margin-bottom: 12px;
+  }
+
+  .home-page .filters {
+    margin-bottom: 16px;
+  }
+}

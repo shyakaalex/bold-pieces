@@ -9,13 +9,18 @@ export default function StoreLayout({ children, variant }) {
   const location = useLocation();
   const isShop = variant === "shop" || location.pathname === "/shop";
   const isProduct = variant === "product" || location.pathname.startsWith("/products/");
+  const isHome = location.pathname === "/";
 
   return (
     <div className={`storefront ${isShop ? "storefront--shop" : ""} ${isProduct ? "storefront--product" : ""}`}>
       {isShop ? <AnnouncementBar variant="compact" /> : null}
       {isProduct ? <AnnouncementBar variant="rich" /> : null}
       <Header />
-      <main className={`site-main ${isShop ? "site-main--shop" : ""} ${isProduct ? "site-main--product" : ""}`}>{children}</main>
+      <main
+        className={`site-main ${isHome ? "site-main--home" : ""} ${isShop ? "site-main--shop" : ""} ${isProduct ? "site-main--product" : ""}`}
+      >
+        {children}
+      </main>
       <Footer variant={isShop ? "rich" : "minimal"} />
       <CartDrawer />
     </div>

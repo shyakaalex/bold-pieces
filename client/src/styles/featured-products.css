@@ -4,8 +4,8 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(192px, 1fr));
   gap: 16px;
-  max-width: 1180px;
-  margin: 16px auto 0;
+  max-width: 1200px;
+  margin: 0 auto;
   align-items: stretch;
 }
 

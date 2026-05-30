@@ -36,14 +36,7 @@ a { color: inherit; }
 .nav { display: flex; gap: 36px; }
 .nav a { font-size: 11px; letter-spacing: 0.12em; text-decoration: none; }
 /* header actions — see styles/header.css */
-.hero { margin-top: 8px; min-height: 420px; display: grid; grid-template-columns: 42% 58%; overflow: hidden; border: 1px solid var(--line); }
-.hero-copy { padding: 52px 48px; background: #f5f0e8; }
-.hero-copy h1 { margin: 0; font-family: "Cormorant Garamond", serif; font-size: 62px; line-height: 0.95; font-weight: 500; }
-.hero-copy h1 em { font-style: italic; font-weight: 500; }
-.hero-copy p { margin: 20px 0 24px; color: var(--text-muted); font-size: 15px; line-height: 1.45; }
-.primary-btn { background: var(--emerald); color: #fff; border: 0; padding: 12px 18px; font-size: 11px; letter-spacing: 0.14em; cursor: pointer; }
-.hero-media { position: relative; background-image: linear-gradient(rgba(10,25,20,.2), rgba(10,25,20,.2)), url("/assets/hero/model 1.png"); background-size: cover; background-position: center; }
-.seal { position: absolute; right: 24px; bottom: 28px; width: 130px; height: 130px; border-radius: 50%; border: 1px solid rgba(255,255,255,.5); color: #efe3c7; display: grid; place-items: center; text-align: center; font-size: 9px; letter-spacing: .14em; }
+.primary-btn { background: var(--emerald); color: #fff; border: 0; padding: 12px 18px; font-size: 11px; letter-spacing: 0.14em; cursor: pointer; text-decoration: none; display: inline-block; }
 .section-head { margin-top: 20px; display: flex; align-items: center; justify-content: space-between; }
 .section-head h3 { margin: 0; font-size: 12px; letter-spacing: .16em; }
 .section-head a { font-size: 11px; text-decoration: none; }
@@ -192,10 +185,6 @@ a { color: inherit; }
 .brand a { display: inline-flex; }
 
 @media (max-width: 1024px) {
-  .hero { grid-template-columns: 1fr; }
-  .hero-copy { padding: 36px 24px; }
-  .hero-copy h1 { font-size: 52px; }
-  .hero-media { min-height: 330px; }
   .story { grid-template-columns: 1fr; }
   .story-image { min-height: 180px; }
   .newsletter { flex-direction: column; align-items: flex-start; }
@@ -209,7 +198,6 @@ a { color: inherit; }
   .desktop-only { display: none; }
   .brand-logo-full { display: none; }
   .brand-logo-mobile { display: block; }
-  .hero-media { background-image: linear-gradient(rgba(10,25,20,.22), rgba(10,25,20,.22)), url("/assets/hero/Model.png"); }
   .footer { flex-direction: column; align-items: flex-start; gap: 8px; }
   .footer nav { flex-wrap: wrap; gap: 10px 16px; }
   .admin-shell { padding: 8px; }
@@ -226,11 +214,6 @@ a { color: inherit; }
   .admin-mobile-orders { display: grid; margin-top: 10px; border: 1px solid var(--line); border-radius: 10px; background: #fff; padding: 10px; }
 
   .site-main { padding-left: max(10px, env(safe-area-inset-left)); padding-right: max(10px, env(safe-area-inset-right)); }
-  .hero { margin-top: 0; min-height: auto; }
-  .hero-copy { padding: 28px 20px; }
-  .hero-copy h1 { font-size: clamp(32px, 9vw, 44px); line-height: 1.05; }
-  .hero-media { min-height: 240px; }
-  .seal { width: 96px; height: 96px; right: 12px; bottom: 16px; font-size: 8px; }
   .section-head { flex-wrap: wrap; gap: 8px; }
   .products.shop-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
   .chip { min-height: 40px; padding: 10px 12px; }
