@@ -1,0 +1,11 @@
+node_modules/
+client/dist/
+client/node_modules/
+server/node_modules/
+server/.env
+.env
+.DS_Store
+Boldpieces/
+Bold pieces/
+uploads/products/*
+!uploads/products/.gitkeep
